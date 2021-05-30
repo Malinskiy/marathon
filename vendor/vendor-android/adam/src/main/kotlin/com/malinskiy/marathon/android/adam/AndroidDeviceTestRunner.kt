@@ -19,10 +19,12 @@ import com.malinskiy.marathon.android.executor.listeners.AndroidTestRunListener
 import com.malinskiy.marathon.android.extension.isIgnored
 import com.malinskiy.marathon.android.model.TestIdentifier
 import com.malinskiy.marathon.execution.Configuration
+import com.malinskiy.marathon.execution.strategy.StrictMode
 import com.malinskiy.marathon.log.MarathonLogging
 import com.malinskiy.marathon.test.Test
 import com.malinskiy.marathon.test.TestBatch
 import com.malinskiy.marathon.test.toTestName
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.receiveOrNull
 import kotlinx.coroutines.isActive
@@ -34,7 +36,7 @@ const val ERROR_STUCK = "Test got stuck. You can increase the timeout in setting
 class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
     private val logger = MarathonLogging.logger("AndroidDeviceTestRunner")
 
-    @OptIn(ExperimentalStdlibApi::class)
+    @ExperimentalCoroutinesApi
     suspend fun execute(
         configuration: Configuration,
         rawTestBatch: TestBatch,
@@ -68,6 +70,18 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
                             return@withTimeoutOrNull
                         } else {
                             processEvents(update, listener)
+                            when (configuration.strictMode) {
+                                StrictMode.ANY_FAIL -> {
+                                    val hasFailed = update
+                                        .filterIsInstance<TestRunFailed>()
+                                        .isNotEmpty()
+                                    if (hasFailed) {
+                                        listener.testRunStoppedFailFast(0)
+                                        return@withTimeoutOrNull
+                                    }
+                                }
+                                else -> { /*do nothing*/ }
+                            }
                         }
                     }
 
@@ -75,7 +89,6 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
                 } else {
                     listener.testRunEnded(0, emptyMap())
                 }
-                Unit
             } ?: listener.testRunFailed(ERROR_STUCK)
         } catch (e: IOException) {
             val errorMessage = "adb error while running tests ${testBatch.tests.map { it.toTestName() }}"

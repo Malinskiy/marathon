@@ -7,6 +7,7 @@ import com.malinskiy.marathon.execution.strategy.PoolingStrategy
 import com.malinskiy.marathon.execution.strategy.RetryStrategy
 import com.malinskiy.marathon.execution.strategy.ShardingStrategy
 import com.malinskiy.marathon.execution.strategy.SortingStrategy
+import com.malinskiy.marathon.execution.strategy.StrictMode
 import com.malinskiy.marathon.execution.strategy.impl.batching.IsolateBatchingStrategy
 import com.malinskiy.marathon.execution.strategy.impl.flakiness.IgnoreFlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.impl.pooling.OmniPoolingStrategy
@@ -36,7 +37,7 @@ data class Configuration constructor(
     val ignoreFailures: Boolean,
     val isCodeCoverageEnabled: Boolean,
     val fallbackToScreenshots: Boolean,
-    val strictMode: Boolean,
+    val strictMode: StrictMode,
     val uncompletedTestRetryQuota: Int,
 
     val testClassRegexes: Collection<Regex>,
@@ -71,7 +72,7 @@ data class Configuration constructor(
         ignoreFailures: Boolean?,
         isCodeCoverageEnabled: Boolean?,
         fallbackToScreenshots: Boolean?,
-        strictMode: Boolean?,
+        strictMode: StrictMode?,
         uncompletedTestRetryQuota: Int?,
 
         testClassRegexes: Collection<Regex>?,
@@ -104,7 +105,7 @@ data class Configuration constructor(
                 ignoreFailures = ignoreFailures ?: false,
                 isCodeCoverageEnabled = isCodeCoverageEnabled ?: false,
                 fallbackToScreenshots = fallbackToScreenshots ?: false,
-                strictMode = strictMode ?: false,
+                strictMode = strictMode ?: StrictMode.ANY_SUCCESS,
                 uncompletedTestRetryQuota = uncompletedTestRetryQuota ?: Integer.MAX_VALUE,
                 testClassRegexes = testClassRegexes ?: listOf(Regex("^((?!Abstract).)*Test[s]*$")),
                 includeSerialRegexes = includeSerialRegexes ?: emptyList(),

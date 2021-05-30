@@ -21,5 +21,7 @@ open class NoOpTestRunListener : AndroidTestRunListener {
 
     override suspend fun testRunStopped(elapsedTime: Long) {}
 
+    override suspend fun testRunStoppedFailFast(elapsedTime: Long) {}
+
     override suspend fun testRunEnded(elapsedTime: Long, runMetrics: Map<String, String>) {}
 }

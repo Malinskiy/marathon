@@ -65,7 +65,7 @@ excludeSerialRegexes:
 ignoreFailures: false
 isCodeCoverageEnabled: false
 fallbackToScreenshots: false
-strictMode: true
+strictMode: all_success
 testBatchTimeoutMillis: 20000
 testOutputTimeoutMillis: 30000
 debug: true

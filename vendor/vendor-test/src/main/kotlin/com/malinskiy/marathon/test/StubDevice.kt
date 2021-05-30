@@ -9,6 +9,7 @@ import com.malinskiy.marathon.device.toDeviceInfo
 import com.malinskiy.marathon.exceptions.TestBatchExecutionException
 import com.malinskiy.marathon.execution.Configuration
 import com.malinskiy.marathon.execution.TestBatchResults
+import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason
 import com.malinskiy.marathon.execution.TestResult
 import com.malinskiy.marathon.execution.TestStatus
 import com.malinskiy.marathon.execution.progress.ProgressReporter
@@ -59,10 +60,12 @@ class StubDevice(
         }
 
         deferred.complete(
-            TestBatchResults(this,
-                             results.filter { it.status == TestStatus.PASSED },
-                             results.filter { it.status == TestStatus.FAILURE },
-                             results.filter { it.status == TestStatus.INCOMPLETE }
+            TestBatchResults(
+                this,
+                results.filter { it.status == TestStatus.PASSED },
+                results.filter { it.status == TestStatus.FAILURE },
+                results.filter { it.status == TestStatus.INCOMPLETE },
+                RunCompletionReason.RUN_END
             )
         )
     }

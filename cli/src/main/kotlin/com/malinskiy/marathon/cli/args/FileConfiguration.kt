@@ -9,6 +9,7 @@ import com.malinskiy.marathon.execution.strategy.PoolingStrategy
 import com.malinskiy.marathon.execution.strategy.RetryStrategy
 import com.malinskiy.marathon.execution.strategy.ShardingStrategy
 import com.malinskiy.marathon.execution.strategy.SortingStrategy
+import com.malinskiy.marathon.execution.strategy.StrictMode
 import java.io.File
 
 data class FileConfiguration(
@@ -27,7 +28,7 @@ data class FileConfiguration(
     var ignoreFailures: Boolean?,
     var isCodeCoverageEnabled: Boolean?,
     var fallbackToScreenshots: Boolean?,
-    var strictMode: Boolean?,
+    var strictMode: StrictMode?,
     var uncompletedTestRetryQuota: Int?,
 
     var testClassRegexes: Collection<Regex>?,

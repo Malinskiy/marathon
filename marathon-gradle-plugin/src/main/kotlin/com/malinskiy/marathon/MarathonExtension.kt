@@ -7,6 +7,7 @@ import com.malinskiy.marathon.android.configuration.FileSyncConfiguration
 import com.malinskiy.marathon.android.configuration.SerialStrategy
 import com.malinskiy.marathon.android.configuration.TimeoutConfiguration
 import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
+import com.malinskiy.marathon.execution.strategy.StrictMode
 import groovy.lang.Closure
 import org.gradle.api.Project
 
@@ -31,7 +32,7 @@ open class MarathonExtension(project: Project) {
     var ignoreFailures: Boolean? = null
     var isCodeCoverageEnabled: Boolean? = null
     var fallbackToScreenshots: Boolean? = null
-    var strictMode: Boolean? = null
+    var strictMode: StrictMode? = null
     var uncompletedTestRetryQuota: Int? = null
 
     var testClassRegexes: Collection<String>? = null

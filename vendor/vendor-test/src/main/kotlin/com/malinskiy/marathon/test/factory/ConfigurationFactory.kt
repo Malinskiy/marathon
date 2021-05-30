@@ -6,6 +6,7 @@ import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
 import com.malinskiy.marathon.execution.strategy.FlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.RetryStrategy
 import com.malinskiy.marathon.execution.strategy.ShardingStrategy
+import com.malinskiy.marathon.execution.strategy.StrictMode
 import com.malinskiy.marathon.test.Mocks
 import com.malinskiy.marathon.test.StubDeviceProvider
 import com.malinskiy.marathon.test.Test
@@ -24,7 +25,7 @@ class ConfigurationFactory {
     var analyticsConfiguration = null
     var excludeSerialRegexes: List<Regex>? = null
     var fallbackToScreenshots = null
-    var strictMode = null
+    var strictMode: StrictMode? = null
     var uncompletedTestRetryQuota: Int? = null
     var filteringConfiguration = null
     var flakinessStrategy: FlakinessStrategy? = null

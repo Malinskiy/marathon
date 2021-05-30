@@ -3,6 +3,11 @@ package com.malinskiy.marathon.android.executor.listeners
 import com.malinskiy.marathon.android.model.TestIdentifier
 import com.malinskiy.marathon.android.model.TestRunResultsAccumulator
 import com.malinskiy.marathon.time.Timer
+import com.malinskiy.marathon.execution.TestBatchResults
+import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_END
+import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_FAILED
+import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_STOPPED
+import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_STOPPED_FAIL_FAST
 
 abstract class AbstractTestRunResultListener(timer: Timer) : NoOpTestRunListener() {
     private val runResult = TestRunResultsAccumulator(timer)
@@ -33,17 +38,22 @@ abstract class AbstractTestRunResultListener(timer: Timer) : NoOpTestRunListener
 
     override suspend fun testRunFailed(errorMessage: String) {
         runResult.testRunFailed(errorMessage)
-        handleTestRunResults(runResult)
+        handleTestRunResults(runResult, RUN_FAILED)
     }
 
     override suspend fun testRunStopped(elapsedTime: Long) {
         runResult.testRunStopped(elapsedTime)
-        handleTestRunResults(runResult)
+        handleTestRunResults(runResult, RUN_STOPPED)
     }
 
     override suspend fun testRunEnded(elapsedTime: Long, runMetrics: Map<String, String>) {
         runResult.testRunEnded(elapsedTime, runMetrics)
-        handleTestRunResults(runResult)
+        handleTestRunResults(runResult, RUN_END)
+    }
+
+    override suspend fun testRunStoppedFailFast(elapsedTime: Long) {
+        runResult.testRunStopped(elapsedTime)
+        handleTestRunResults(runResult, RUN_STOPPED_FAIL_FAST)
     }
 
     abstract suspend fun handleTestRunResults(runResult: TestRunResultsAccumulator)

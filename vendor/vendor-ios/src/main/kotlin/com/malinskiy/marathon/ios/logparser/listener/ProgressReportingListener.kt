@@ -4,6 +4,7 @@ import com.malinskiy.marathon.device.Device
 import com.malinskiy.marathon.device.DevicePoolId
 import com.malinskiy.marathon.device.toDeviceInfo
 import com.malinskiy.marathon.execution.TestBatchResults
+import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_END
 import com.malinskiy.marathon.execution.TestResult
 import com.malinskiy.marathon.execution.TestStatus
 import com.malinskiy.marathon.execution.progress.ProgressReporter
@@ -34,7 +35,7 @@ class ProgressReportingListener(
             !receivedTestNames.contains(it.toSafeTestName())
         }.createUncompletedTestResults(received)
 
-        deferredResults.complete(TestBatchResults(device, success, failure, uncompleted))
+        deferredResults.complete(TestBatchResults(device, success, failure, uncompleted, RUN_END))
     }
 
     private fun List<Test>.createUncompletedTestResults(received: Collection<TestResult>): Collection<TestResult> {

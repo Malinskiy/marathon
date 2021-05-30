@@ -1,6 +1,7 @@
 package com.malinskiy.marathon.execution.progress.tracker
 
 import com.malinskiy.marathon.execution.Configuration
+import com.malinskiy.marathon.execution.strategy.StrictMode
 import com.malinskiy.marathon.test.Mocks
 import com.malinskiy.marathon.test.StubDeviceProvider
 import com.malinskiy.marathon.test.TestVendorConfiguration
@@ -17,7 +18,7 @@ class PoolProgressTrackerTest {
         metaProperties = emptyList()
     )
 
-    private fun createConfiguration(strictMode: Boolean): Configuration {
+    private fun createConfiguration(strictMode: StrictMode): Configuration {
         return Configuration(
             name = "",
             outputDir = File(""),
@@ -49,7 +50,7 @@ class PoolProgressTrackerTest {
 
     @Test
     fun nonStrictMode_case1() {
-        val tracker = PoolProgressTracker(createConfiguration(strictMode = false))
+        val tracker = PoolProgressTracker(createConfiguration(strictMode = StrictMode.ANY_SUCCESS))
         tracker.testStarted(test)
         tracker.testPassed(test)
         tracker.testFailed(test)
@@ -60,7 +61,7 @@ class PoolProgressTrackerTest {
 
     @Test
     fun strictMode_case1() {
-        val tracker = PoolProgressTracker(createConfiguration(strictMode = true))
+        val tracker = PoolProgressTracker(createConfiguration(strictMode = StrictMode.ALL_SUCCESS))
         tracker.testStarted(test)
         tracker.testPassed(test)
         tracker.testFailed(test)
