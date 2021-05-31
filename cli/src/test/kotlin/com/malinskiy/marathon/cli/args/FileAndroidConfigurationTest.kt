@@ -5,6 +5,8 @@ import com.malinskiy.marathon.android.VendorType
 import com.malinskiy.marathon.android.configuration.AllureConfiguration
 import com.malinskiy.marathon.android.configuration.FileSyncConfiguration
 import com.malinskiy.marathon.android.configuration.SerialStrategy
+import com.malinskiy.marathon.android.configuration.TestAccessConfiguration
+import com.malinskiy.marathon.android.configuration.ThreadingConfiguration
 import com.malinskiy.marathon.android.configuration.TimeoutConfiguration
 import com.malinskiy.marathon.exceptions.ConfigurationException
 import org.amshove.kluent.shouldEqual
@@ -30,6 +32,8 @@ class FileAndroidConfigurationTest {
         AllureConfiguration(),
         TimeoutConfiguration(),
         FileSyncConfiguration(),
+        ThreadingConfiguration(),
+        TestAccessConfiguration()
     )
 
     private val env: File = File.createTempFile("foo", "bar")

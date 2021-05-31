@@ -9,7 +9,7 @@ import com.malinskiy.adam.request.device.ListDevicesRequest
 import com.malinskiy.adam.request.misc.GetAdbServerVersionRequest
 import com.malinskiy.marathon.actor.unboundedChannel
 import com.malinskiy.marathon.analytics.internal.pub.Track
-import com.malinskiy.marathon.android.AndroidConfiguration
+import com.malinskiy.marathon.android.configuration.AndroidConfiguration
 import com.malinskiy.marathon.android.exception.AdbStartException
 import com.malinskiy.marathon.device.DeviceProvider
 import com.malinskiy.marathon.exceptions.NoDevicesException
@@ -48,7 +48,12 @@ class AdamDeviceProvider(
 
     private val channel: Channel<DeviceProvider.DeviceEvent> = unboundedChannel()
     override val coroutineContext: CoroutineContext by lazy { newFixedThreadPoolContext(1, "DeviceMonitor") }
-    private val adbCommunicationContext: CoroutineContext by lazy { newFixedThreadPoolContext(androidConfiguration.threadingConfiguration.adbIoThreads, "AdbIOThreadPool") }
+    private val adbCommunicationContext: CoroutineContext by lazy {
+        newFixedThreadPoolContext(
+            androidConfiguration.threadingConfiguration.adbIoThreads,
+            "AdbIOThreadPool"
+        )
+    }
     private val setupSupervisor = SupervisorJob()
     private var providerJob: Job? = null
 
@@ -90,16 +95,16 @@ class AdamDeviceProvider(
         } ?: throw NoDevicesException("No devices found")
 
         providerJob = launch {
-                /**
-                 * This allows us to survive `adb kill-server`
-                 */
-                while (isActive) {
-                    deviceEventsChannelMutex.withLock {
-                        deviceEventsChannel = client.execute(AsyncDeviceMonitorRequest(), this)
-                    }
-                    for (currentDeviceList in deviceEventsChannel) {
-                        deviceStateTracker.update(currentDeviceList).forEach { update ->
-                            val serial = update.first
+            /**
+             * This allows us to survive `adb kill-server`
+             */
+            while (isActive) {
+                deviceEventsChannelMutex.withLock {
+                    deviceEventsChannel = client.execute(AsyncDeviceMonitorRequest(), this)
+                }
+                for (currentDeviceList in deviceEventsChannel) {
+                    deviceStateTracker.update(currentDeviceList).forEach { update ->
+                        val serial = update.first
                             val state = update.second
                             when (state) {
                                 TrackingUpdate.CONNECTED -> {
@@ -116,24 +121,24 @@ class AdamDeviceProvider(
                                             vendorConfiguration.serialStrategy
                                         )
                                     track.trackProviderDevicePreparing(device) {
-                                    val job = launch(setupSupervisor) {
-                                        device.setup()
-                                        channel.send(DeviceProvider.DeviceEvent.DeviceConnected(device))
+                                        val job = launch(setupSupervisor) {
+                                            device.setup()
+                                            channel.send(DeviceProvider.DeviceEvent.DeviceConnected(device))
+                                        }
+                                        devices[serial] = ProvidedDevice(device, job)
                                     }
-                                    devices[serial] = ProvidedDevice(device, job)
                                 }
-                            }
-                            TrackingUpdate.DISCONNECTED -> {
-                                devices[serial]?.let { (device, job) ->
-                                    if (job.isActive) {
-                                        job.cancelAndJoin()
+                                TrackingUpdate.DISCONNECTED -> {
+                                    devices[serial]?.let { (device, job) ->
+                                        if (job.isActive) {
+                                            job.cancelAndJoin()
+                                        }
+                                        channel.send(DeviceProvider.DeviceEvent.DeviceDisconnected(device))
+                                        device.dispose()
                                     }
-                                    channel.send(DeviceProvider.DeviceEvent.DeviceDisconnected(device))
-                                    device.dispose()
                                 }
+                                TrackingUpdate.NOTHING_TO_DO -> Unit
                             }
-                            TrackingUpdate.NOTHING_TO_DO -> Unit
-                        }
                         logger.debug { "Device $serial changed state to $state" }
                     }
                 }

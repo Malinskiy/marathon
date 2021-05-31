@@ -5,7 +5,7 @@ object Versions {
     val coroutines = "1.3.9"
 
     val ddmlib = "27.1.2"
-    val adam = "0.2.5"
+    val adam = "0.3.0"
     val dexTestParser = "2.1.1"
     val kotlinLogging = "1.7.6"
     val slf4jAPI = "1.0.0"
@@ -62,7 +62,8 @@ object BuildPlugins {
 
 object Libraries {
     val ddmlib = "com.android.tools.ddms:ddmlib:${Versions.ddmlib}"
-    val adam = "com.malinskiy:adam:${Versions.adam}"
+    val adam = "com.malinskiy.adam:adam:${Versions.adam}"
+    val adamTestrunnerContract = "com.malinskiy.adam:android-testrunner-contract:${Versions.adam}"
     val androidCommon = "com.android.tools:common:${Versions.ddmlib}"
     val dexTestParser = "com.linkedin.dextestparser:parser:${Versions.dexTestParser}"
     val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"

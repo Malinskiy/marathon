@@ -986,8 +986,9 @@ By default, the build fails if some tests failed. If you want to the build to su
 ```yaml
 ignoreFailures: true
 ```
-{% endtab %}
-{% tab ignore-failures Gradle %}
+
+{% endtab %} {% tab ignore-failures Gradle %}
+
 ```kotlin
 marathon {
     ignoreFailures = true

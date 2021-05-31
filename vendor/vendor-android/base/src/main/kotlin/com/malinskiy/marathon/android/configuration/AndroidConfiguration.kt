@@ -1,12 +1,6 @@
-package com.malinskiy.marathon.android
+package com.malinskiy.marathon.android.configuration
 
-import com.malinskiy.marathon.android.configuration.AllureConfiguration
-import com.malinskiy.marathon.android.configuration.AndroidLogConfigurator
-import com.malinskiy.marathon.android.configuration.DEFAULT_ALLURE_CONFIGURATION
-import com.malinskiy.marathon.android.configuration.FileSyncConfiguration
-import com.malinskiy.marathon.android.configuration.SerialStrategy
-import com.malinskiy.marathon.android.configuration.ThreadingConfiguration
-import com.malinskiy.marathon.android.configuration.TimeoutConfiguration
+import com.malinskiy.marathon.android.ScreenRecordConfiguration
 import com.malinskiy.marathon.android.di.androidModule
 import com.malinskiy.marathon.device.DeviceProvider
 import com.malinskiy.marathon.execution.TestParser
@@ -44,6 +38,7 @@ data class AndroidConfiguration(
     val timeoutConfiguration: TimeoutConfiguration = TimeoutConfiguration(),
     val fileSyncConfiguration: FileSyncConfiguration = FileSyncConfiguration(),
     val threadingConfiguration: ThreadingConfiguration = ThreadingConfiguration(),
+    val testAccessConfiguration: TestAccessConfiguration = TestAccessConfiguration(),
 ) : VendorConfiguration, KoinComponent {
 
     override fun testParser(): TestParser? = get()

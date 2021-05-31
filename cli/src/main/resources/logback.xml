@@ -21,7 +21,7 @@
     </encoder>
   </appender>
   <root level="DEBUG">
-    <appender-ref ref="STDOUT" />
+    <appender-ref ref="STDOUT"/>
   </root>
   <logger name="io.netty" level="error"/>
   <logger name="io.vertx" level="error"/>

@@ -9,8 +9,18 @@ android {
     buildToolsVersion("29.0.2")
     compileSdkVersion(30)
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude("META-INF/INDEX.LIST")
+        exclude("META-INF/io.netty.versions.properties")
+    }
+
     defaultConfig {
-        minSdkVersion(18)
+        minSdkVersion(21)
         targetSdkVersion(30)
 
         applicationId = "com.example"
@@ -42,6 +52,7 @@ dependencies {
     implementation(Libraries.constraintLayout)
     implementation(Libraries.kotlinStdLib)
 
+    androidTestImplementation(TestLibraries.adamJunit4)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.testRules)
     androidTestImplementation(TestLibraries.extJunit)

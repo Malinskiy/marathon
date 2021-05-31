@@ -12,9 +12,10 @@ import com.malinskiy.adam.request.testrunner.TestRunStartedEvent
 import com.malinskiy.adam.request.testrunner.TestRunStopped
 import com.malinskiy.adam.request.testrunner.TestRunnerRequest
 import com.malinskiy.adam.request.testrunner.TestStarted
-import com.malinskiy.marathon.android.AndroidConfiguration
 import com.malinskiy.marathon.android.ApkParser
 import com.malinskiy.marathon.android.InstrumentationInfo
+import com.malinskiy.marathon.android.adam.execution.ArgumentsFactory
+import com.malinskiy.marathon.android.configuration.AndroidConfiguration
 import com.malinskiy.marathon.android.executor.listeners.AndroidTestRunListener
 import com.malinskiy.marathon.android.extension.isIgnored
 import com.malinskiy.marathon.android.model.TestIdentifier
@@ -33,6 +34,7 @@ const val ERROR_STUCK = "Test got stuck. You can increase the timeout in setting
 
 class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
     private val logger = MarathonLogging.logger("AndroidDeviceTestRunner")
+    private val argumentsFactory = ArgumentsFactory(device)
 
     @OptIn(ExperimentalStdlibApi::class)
     suspend fun execute(
@@ -55,7 +57,8 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
                 if (testBatch.tests.isNotEmpty()) {
                     clearData(androidConfiguration, info)
                     listener.beforeTestRun()
-                    logger.debug { "Execution started" }
+
+                    logger.debug { "Running ${String(runnerRequest.serialize())}" }
                     val localChannel = device.executeTestRequest(runnerRequest)
                     channel = localChannel
 
@@ -158,22 +161,21 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
         }
 
         logger.debug { "tests = ${tests.toList()}" }
+        val overrides = argumentsFactory.generate(configuration, androidConfiguration)
 
-        return TestRunnerRequest(
+        val request = TestRunnerRequest(
             testPackage = info.instrumentationPackage,
             runnerClass = info.testRunnerClass,
             noWindowAnimations = true,
             instrumentOptions = InstrumentOptions(
                 clazz = tests,
                 coverageFile = if (configuration.isCodeCoverageEnabled) "${device.externalStorageMount}/coverage/coverage-${testBatch.id}.ec" else null,
-                overrides = androidConfiguration.instrumentationArgs.toMutableMap().apply {
-                    if (configuration.isCodeCoverageEnabled) {
-                        put("coverage", "true")
-                    }
-                }
+                overrides = overrides
             ),
             socketIdleTimeout = Long.MAX_VALUE
         )
+
+        return request
     }
 }
 

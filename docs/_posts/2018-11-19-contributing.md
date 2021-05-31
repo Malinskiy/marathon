@@ -66,12 +66,18 @@ Before pushing your changes please check if our linter (*detekt*) passes via ```
 **analytics:usage** - This is an analytics implementation that we're using for tracking anonymised usage of marathon.
 
 # Development chat
+
 We're available for any questions or proposals on [Slack][6]. Feel free to join!
 
 [1]: https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
 [2]: https://www.jetbrains.com/idea/download/
+
 [3]: https://desktop.github.com/
+
 [4]: https://github.com/MarathonLabs/marathon/issues
+
 [5]: https://github.com/MarathonLabs/marathon/projects/1
+
 [6]: https://bit.ly/2LLghaW
 [7]: {% post_url 2018-11-19-samples %}

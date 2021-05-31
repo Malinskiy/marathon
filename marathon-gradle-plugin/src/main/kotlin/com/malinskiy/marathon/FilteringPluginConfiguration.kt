@@ -67,7 +67,7 @@ fun Wrapper.toList(): List<TestFilter> {
     }
     this.annotationDataFilter?.map {
         val currentData = it.split(",")
-        AnnotationDataFilter( currentData.first().toRegex(), currentData[1].toRegex())
+        AnnotationDataFilter(currentData.first().toRegex(), currentData[1].toRegex())
     }?.let {
         mutableList.addAll(it)
     }

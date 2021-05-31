@@ -1,5 +1,6 @@
 package com.malinskiy.marathon.android
 
+import com.malinskiy.marathon.android.configuration.AndroidConfiguration
 import com.malinskiy.marathon.execution.Configuration
 import com.malinskiy.marathon.test.MetaProperty
 import org.amshove.kluent.shouldEqual

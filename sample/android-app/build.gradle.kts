@@ -21,6 +21,7 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenLocal()
         maven { url = uri("$rootDir/../build/repository") }
         jcenter()
         mavenCentral()

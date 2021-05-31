@@ -12,8 +12,10 @@ class AnnotationDataFilterTest {
     private val filter = AnnotationDataFilter("""com\.example.*""".toRegex(), ".*".toRegex())
     val tests = listOf(test1, test2, test3)
 
-    val test4 = stubTest(AnnotationData("com.example.IncorrectAnnotation", "CORRECT_VALUE"),
-                         AnnotationData("com.example.CorrectAnnotation", "INCORRECT_VALUE"))
+    val test4 = stubTest(
+        AnnotationData("com.example.IncorrectAnnotation", "CORRECT_VALUE"),
+        AnnotationData("com.example.CorrectAnnotation", "INCORRECT_VALUE")
+    )
     private val filter2 = AnnotationDataFilter("""com\.example\.CorrectAnnotation""".toRegex(), "CORRECT_VALUE".toRegex())
 
     private val test5MetaProperty = MetaProperty("com.example.CorrectAnnotation", mapOf("testKey" to "testValue"))
@@ -35,7 +37,7 @@ class AnnotationDataFilterTest {
     }
 
     @Test
-    fun shouldNotFailIfValueFieldIsNotExist(){
+    fun shouldNotFailIfValueFieldIsNotExist() {
         filter.filter(listOf(test5)) shouldEqual emptyList()
     }
 }

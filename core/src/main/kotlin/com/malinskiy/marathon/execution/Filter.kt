@@ -90,7 +90,8 @@ data class TestMethodFilter(@JsonProperty("regex") val regex: Regex) : TestFilte
 }
 
 
-data class AnnotationDataFilter(@JsonProperty("nameRegex") val nameRegex: Regex, @JsonProperty("valueRegex") val valueRegex: Regex ) : TestFilter {
+data class AnnotationDataFilter(@JsonProperty("nameRegex") val nameRegex: Regex, @JsonProperty("valueRegex") val valueRegex: Regex) :
+    TestFilter {
     override fun filter(tests: List<Test>): List<Test> = tests.filter { test ->
         test.metaProperties.any {
             match(it)

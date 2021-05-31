@@ -3,6 +3,7 @@ package com.malinskiy.marathon.android
 import com.android.sdklib.AndroidVersion
 import com.malinskiy.marathon.analytics.internal.pub.Track
 import com.malinskiy.marathon.android.configuration.AggregationMode
+import com.malinskiy.marathon.android.configuration.AndroidConfiguration
 import com.malinskiy.marathon.android.configuration.FileSyncEntry
 import com.malinskiy.marathon.android.configuration.SerialStrategy
 import com.malinskiy.marathon.android.exception.InvalidSerialConfiguration
@@ -226,6 +227,14 @@ abstract class BaseAndroidDevice(
         }
 
         return booted
+    }
+    
+    fun isLocalEmulator() = adbSerial.startsWith("emulator-")
+
+    protected suspend fun AndroidDevice.isEmulator(): Boolean = when {
+        getProperty("ro.kernel.qemu")?.isNotBlank() ?: false -> true
+        getProperty("service.adb.transport") == "goldfish" -> true
+        else -> false
     }
 
     protected fun createExecutionListeners(
