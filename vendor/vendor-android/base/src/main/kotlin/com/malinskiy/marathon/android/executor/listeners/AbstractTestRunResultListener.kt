@@ -2,12 +2,12 @@ package com.malinskiy.marathon.android.executor.listeners
 
 import com.malinskiy.marathon.android.model.TestIdentifier
 import com.malinskiy.marathon.android.model.TestRunResultsAccumulator
-import com.malinskiy.marathon.time.Timer
 import com.malinskiy.marathon.execution.TestBatchResults
 import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_END
 import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_FAILED
 import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_STOPPED
 import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_STOPPED_FAIL_FAST
+import com.malinskiy.marathon.time.Timer
 
 abstract class AbstractTestRunResultListener(timer: Timer) : NoOpTestRunListener() {
     private val runResult = TestRunResultsAccumulator(timer)
@@ -56,5 +56,8 @@ abstract class AbstractTestRunResultListener(timer: Timer) : NoOpTestRunListener
         handleTestRunResults(runResult, RUN_STOPPED_FAIL_FAST)
     }
 
-    abstract suspend fun handleTestRunResults(runResult: TestRunResultsAccumulator)
+    abstract suspend fun handleTestRunResults(
+        runResult: TestRunResultsAccumulator,
+        reason: TestBatchResults.RunCompletionReason
+    )
 }
