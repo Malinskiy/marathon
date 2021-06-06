@@ -82,7 +82,6 @@ class TestResultReporter(
             }
             on<TestEvent.Incomplete> {
                 if (it.final) {
-                    // TODO
                     transitionTo(TestState.Failed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
                 } else {
                     transitionTo(TestState.Executed(it.device, it.testResult, count))
