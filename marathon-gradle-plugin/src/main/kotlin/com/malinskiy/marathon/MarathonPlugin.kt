@@ -25,7 +25,7 @@ class MarathonPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         log.info { "Applying marathon plugin" }
 
-        val extension: MarathonExtension = project.extensions.create("marathon", MarathonExtension::class.java, project)
+        val extension: MarathonExtension = project.extensions.create("marathon", MarathonExtension::class.java)
 
         project.afterEvaluate {
             val exceptionsReporter = ExceptionsReporterFactory.get(extension.bugsnag != false)
@@ -51,7 +51,7 @@ class MarathonPlugin : Plugin<Project> {
             }
             val testedExtension = appExtension ?: libraryExtension
 
-            val conf = extensions.getByName("marathon") as? MarathonExtension ?: MarathonExtension(project)
+            val conf = extensions.getByName("marathon") as? MarathonExtension ?: MarathonExtension()
 
             testedExtension!!.testVariants.all {
                 log.info { "Applying marathon for ${this.baseName}" }

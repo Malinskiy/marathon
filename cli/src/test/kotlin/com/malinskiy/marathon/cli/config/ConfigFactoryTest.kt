@@ -26,6 +26,7 @@ import com.malinskiy.marathon.execution.SimpleClassnameFilter
 import com.malinskiy.marathon.execution.TestMethodFilter
 import com.malinskiy.marathon.execution.TestPackageFilter
 import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.execution.strategy.impl.batching.FixedSizeBatchingStrategy
 import com.malinskiy.marathon.execution.strategy.impl.batching.IsolateBatchingStrategy
 import com.malinskiy.marathon.execution.strategy.impl.flakiness.IgnoreFlakinessStrategy
@@ -155,7 +156,7 @@ class ConfigFactoryTest {
         configuration.ignoreFailures shouldEqual false
         configuration.isCodeCoverageEnabled shouldEqual false
         configuration.fallbackToScreenshots shouldEqual false
-        configuration.strictMode shouldEqual true
+        configuration.executionStrategy shouldEqual ExecutionStrategy.ALL_SUCCESS
         configuration.testBatchTimeoutMillis shouldEqual 20_000
         configuration.testOutputTimeoutMillis shouldEqual 30_000
         configuration.debug shouldEqual true

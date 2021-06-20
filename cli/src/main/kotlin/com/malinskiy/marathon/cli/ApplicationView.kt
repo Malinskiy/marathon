@@ -35,7 +35,7 @@ fun main(args: Array<String>): Unit = mainBody(
         try {
             bugsnagExceptionsReporter.start(AppType.CLI)
             val mapper = ObjectMapper(YAMLFactory().disable(YAMLGenerator.Feature.USE_NATIVE_TYPE_ID))
-            mapper.registerModule(DeserializeModule(InstantTimeProviderImpl()))
+                .registerModule(DeserializeModule(InstantTimeProviderImpl()))
                 .registerModule(KotlinModule())
                 .registerModule(JavaTimeModule())
             val configuration = ConfigFactory(mapper).create(

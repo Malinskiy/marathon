@@ -4,6 +4,7 @@ import com.malinskiy.marathon.execution.AnalyticsConfiguration
 import com.malinskiy.marathon.execution.FilteringConfiguration
 import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
 import com.malinskiy.marathon.execution.strategy.BatchingStrategy
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.execution.strategy.FlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.PoolingStrategy
 import com.malinskiy.marathon.execution.strategy.RetryStrategy
@@ -27,7 +28,9 @@ data class FileConfiguration(
     var ignoreFailures: Boolean?,
     var isCodeCoverageEnabled: Boolean?,
     var fallbackToScreenshots: Boolean?,
+    @Deprecated("Will be deleted in 0.7.0. Use executionStrategy")
     var strictMode: Boolean?,
+    var executionStrategy: ExecutionStrategy?,
     var uncompletedTestRetryQuota: Int?,
 
     var testClassRegexes: Collection<Regex>?,

@@ -8,6 +8,7 @@ import com.malinskiy.marathon.device.toDeviceInfo
 import com.malinskiy.marathon.execution.Configuration
 import com.malinskiy.marathon.execution.DevicePoolMessage.FromQueue
 import com.malinskiy.marathon.execution.TestBatchResults
+import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason
 import com.malinskiy.marathon.execution.TestResult
 import com.malinskiy.marathon.execution.TestShard
 import com.malinskiy.marathon.execution.TestStatus
@@ -226,12 +227,14 @@ private val TEST_1 = MarathonTest("", "", "test1", emptyList())
 private fun createBatchResult(
     finished: List<TestResult> = emptyList(),
     failed: List<TestResult> = emptyList(),
-    uncompleted: List<TestResult> = emptyList()
+    uncompleted: List<TestResult> = emptyList(),
+    completionReason: RunCompletionReason = RunCompletionReason.RUN_END
 ): TestBatchResults = TestBatchResults(
     TEST_DEVICE,
     finished,
     failed,
-    uncompleted
+    uncompleted,
+    completionReason
 )
 
 private fun createTestResult(test: MarathonTest, status: TestStatus) = TestResult(
@@ -279,7 +282,7 @@ private val DEFAULT_CONFIGURATION = Configuration(
     ignoreFailures = null,
     isCodeCoverageEnabled = null,
     fallbackToScreenshots = null,
-    strictMode = null,
+    executionStrategy = null,
     uncompletedTestRetryQuota = null,
     testClassRegexes = null,
     includeSerialRegexes = null,

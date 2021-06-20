@@ -24,7 +24,7 @@ class AndroidTestParserTest {
         ignoreFailures = null,
         isCodeCoverageEnabled = null,
         fallbackToScreenshots = null,
-        strictMode = null,
+        executionStrategy = null,
         uncompletedTestRetryQuota = null,
         testClassRegexes = null,
         includeSerialRegexes = null,

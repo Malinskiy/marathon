@@ -1,6 +1,5 @@
 package com.malinskiy.marathon.execution.queue
 
-import com.malinskiy.marathon.analytics.external.Analytics
 import com.malinskiy.marathon.analytics.internal.pub.Track
 import com.malinskiy.marathon.createDeviceInfo
 import com.malinskiy.marathon.device.DevicePoolId
@@ -8,6 +7,7 @@ import com.malinskiy.marathon.execution.Configuration
 import com.malinskiy.marathon.execution.TestResult
 import com.malinskiy.marathon.execution.TestShard
 import com.malinskiy.marathon.execution.TestStatus
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.generateTest
 import com.malinskiy.marathon.test.Mocks
 import com.malinskiy.marathon.test.StubDeviceProvider
@@ -22,11 +22,10 @@ import java.io.File
 
 class TestResultReporterTest {
     private val track = mock<Track>()
-    private val analytics = mock<Analytics>()
 
     @BeforeEach
     fun `setup mocks`() {
-        reset(track, analytics)
+        reset(track)
     }
 
     private val defaultConfig = Configuration(
@@ -43,7 +42,7 @@ class TestResultReporterTest {
         ignoreFailures = null,
         isCodeCoverageEnabled = null,
         fallbackToScreenshots = null,
-        strictMode = null,
+        executionStrategy = null,
         uncompletedTestRetryQuota = null,
         testClassRegexes = null,
         includeSerialRegexes = null,
@@ -56,13 +55,12 @@ class TestResultReporterTest {
         analyticsTracking = false,
         deviceInitializationTimeoutMillis = null
     )
-    private val strictConfig = defaultConfig.copy(strictMode = true)
+    private val strictConfig = defaultConfig.copy(executionStrategy = ExecutionStrategy.ALL_SUCCESS)
     val test = generateTest()
     private val poolId = DevicePoolId("test")
 
     private fun filterDefault() = TestResultReporter(
         poolId,
-        analytics,
         TestShard(listOf(test, test, test)),
         defaultConfig,
         track
@@ -70,7 +68,6 @@ class TestResultReporterTest {
 
     private fun filterStrict() = TestResultReporter(
         poolId,
-        analytics,
         TestShard(listOf(test, test, test)),
         strictConfig,
         track

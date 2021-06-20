@@ -1,20 +1,19 @@
 package com.malinskiy.marathon.execution.queue
 
 import com.malinskiy.marathon.actor.StateMachine
-import com.malinskiy.marathon.analytics.external.Analytics
 import com.malinskiy.marathon.analytics.internal.pub.Track
 import com.malinskiy.marathon.device.DeviceInfo
 import com.malinskiy.marathon.device.DevicePoolId
 import com.malinskiy.marathon.execution.Configuration
 import com.malinskiy.marathon.execution.TestResult
 import com.malinskiy.marathon.execution.TestShard
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.log.MarathonLogging
 import com.malinskiy.marathon.test.Test
 import com.malinskiy.marathon.test.toTestName
 
 class TestResultReporter(
     private val poolId: DevicePoolId,
-    private val analytics: Analytics,
     shard: TestShard,
     private val configuration: Configuration,
     private val track: Track
@@ -28,17 +27,29 @@ class TestResultReporter(
         initialState(TestState.Added(initialCount))
         state<TestState.Added> {
             on<TestEvent.Passed> {
-                if (!configuration.strictMode || count <= 1) {
+                if (count <= 1) {
                     transitionTo(TestState.Passed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
                 } else {
-                    transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                    when (configuration.executionStrategy) {
+                        ExecutionStrategy.ANY_SUCCESS ->
+                            transitionTo(TestState.Passed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
+                        ExecutionStrategy.ALL_SUCCESS,
+                        ExecutionStrategy.ANY_FAIL ->
+                            transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                    }
                 }
             }
             on<TestEvent.Failed> {
-                if (configuration.strictMode || count <= 1) {
+                if (count <= 1) {
                     transitionTo(TestState.Failed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
                 } else {
-                    transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                    when (configuration.executionStrategy) {
+                        ExecutionStrategy.ANY_SUCCESS ->
+                            transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                        ExecutionStrategy.ALL_SUCCESS,
+                        ExecutionStrategy.ANY_FAIL ->
+                            transitionTo(TestState.Failed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
+                    }
                 }
             }
             on<TestEvent.Incomplete> {
@@ -57,10 +68,16 @@ class TestResultReporter(
         }
         state<TestState.Executed> {
             on<TestEvent.Failed> {
-                if (configuration.strictMode || count <= 1) {
+                if (count <= 1) {
                     transitionTo(TestState.Failed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
                 } else {
-                    transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                    when (configuration.executionStrategy) {
+                        ExecutionStrategy.ANY_SUCCESS ->
+                            transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                        ExecutionStrategy.ALL_SUCCESS,
+                        ExecutionStrategy.ANY_FAIL ->
+                            transitionTo(TestState.Failed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
+                    }
                 }
             }
             on<TestEvent.Incomplete> {
@@ -74,10 +91,16 @@ class TestResultReporter(
                 transitionTo(this.copy(count = this.count - it.diff))
             }
             on<TestEvent.Passed> {
-                if (!configuration.strictMode || count <= 1) {
+                if (count <= 1) {
                     transitionTo(TestState.Passed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
                 } else {
-                    transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                    when (configuration.executionStrategy) {
+                        ExecutionStrategy.ANY_SUCCESS ->
+                            transitionTo(TestState.Passed(it.device, it.testResult), TestAction.SaveReport(it.device, it.testResult))
+                        ExecutionStrategy.ALL_SUCCESS,
+                        ExecutionStrategy.ANY_FAIL ->
+                            transitionTo(TestState.Executed(it.device, it.testResult, count - 1))
+                    }
                 }
             }
             on<TestEvent.Retry> {

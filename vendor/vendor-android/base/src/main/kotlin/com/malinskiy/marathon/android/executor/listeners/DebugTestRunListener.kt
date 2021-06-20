@@ -8,6 +8,10 @@ class DebugTestRunListener(private val device: AndroidDevice) : AndroidTestRunLi
 
     private val logger = MarathonLogging.logger("DebugTestRunListener")
 
+    override suspend fun beforeTestRun() {
+        logger.info { "beforeTestRun ${device.serialNumber}" }
+    }
+
     override suspend fun testRunStarted(runName: String, testCount: Int) {
         logger.info { "testRunStarted ${device.serialNumber}" }
     }

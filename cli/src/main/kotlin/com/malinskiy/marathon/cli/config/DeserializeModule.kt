@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.malinskiy.marathon.cli.args.FileVendorConfiguration
 import com.malinskiy.marathon.cli.config.deserialize.AnalyticsConfigurationDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.BatchingStrategyDeserializer
+import com.malinskiy.marathon.cli.config.deserialize.ExecutionStrategyDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.ExecutionTimeSortingStrategyDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.FileVendorConfigurationDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.FixedSizeBatchingStrategyDeserializer
@@ -23,6 +24,7 @@ import com.malinskiy.marathon.execution.AnalyticsConfiguration
 import com.malinskiy.marathon.execution.TestFilter
 import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
 import com.malinskiy.marathon.execution.strategy.BatchingStrategy
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.execution.strategy.FlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.PoolingStrategy
 import com.malinskiy.marathon.execution.strategy.RetryStrategy
@@ -62,5 +64,6 @@ class DeserializeModule(instantTimeProvider: InstantTimeProvider) : SimpleModule
         addDeserializer(TestFilter::class.java, TestFilterDeserializer())
         addDeserializer(FileVendorConfiguration::class.java, FileVendorConfigurationDeserializer())
         addDeserializer(ScreenRecordingPolicy::class.java, ScreenRecordingPolicyDeserializer())
+        addDeserializer(ExecutionStrategy::class.java, ExecutionStrategyDeserializer())
     }
 }

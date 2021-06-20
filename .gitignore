@@ -276,3 +276,17 @@ DerivedData
 *.xcuserstate
 *.profraw
 sample/ios-app/Marathondevices
+
+# Android Sdk
+
+local.properties
+
+## IDEA specific
+.idea/markdown-navigator.xml
+.idea/markdown-navigator-enh.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/modules
+

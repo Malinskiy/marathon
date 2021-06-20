@@ -7,10 +7,10 @@ import com.malinskiy.marathon.android.configuration.FileSyncConfiguration
 import com.malinskiy.marathon.android.configuration.SerialStrategy
 import com.malinskiy.marathon.android.configuration.TimeoutConfiguration
 import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import groovy.lang.Closure
-import org.gradle.api.Project
 
-open class MarathonExtension(project: Project) {
+open class MarathonExtension {
     var name: String = "Marathon"
 
     var vendor: VendorType? = null
@@ -31,7 +31,9 @@ open class MarathonExtension(project: Project) {
     var ignoreFailures: Boolean? = null
     var isCodeCoverageEnabled: Boolean? = null
     var fallbackToScreenshots: Boolean? = null
+    @Deprecated("Will be deleted in 0.7.0. Use executionStrategy")
     var strictMode: Boolean? = null
+    var executionStrategy: ExecutionStrategy? = null
     var uncompletedTestRetryQuota: Int? = null
 
     var testClassRegexes: Collection<String>? = null

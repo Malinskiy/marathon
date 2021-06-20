@@ -4,7 +4,7 @@ import com.malinskiy.marathon.android.AndroidDevice
 import com.malinskiy.marathon.android.configuration.AggregationMode
 import com.malinskiy.marathon.android.configuration.FileSyncConfiguration
 import com.malinskiy.marathon.android.configuration.FileSyncEntry
-import com.malinskiy.marathon.android.executor.listeners.AndroidTestRunListener
+import com.malinskiy.marathon.android.executor.listeners.NoOpTestRunListener
 import com.malinskiy.marathon.device.DevicePoolId
 import com.malinskiy.marathon.device.toDeviceInfo
 import com.malinskiy.marathon.io.FileManager
@@ -17,7 +17,7 @@ class FileSyncTestRunListener(
     private val device: AndroidDevice,
     private val configuration: FileSyncConfiguration,
     private val fileManager: FileManager
-) : AndroidTestRunListener {
+) : NoOpTestRunListener() {
 
     private val logger = MarathonLogging.logger("FileSyncTestRunListener")
 
