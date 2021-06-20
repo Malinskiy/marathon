@@ -30,9 +30,9 @@ class StrictModeDeserializer : StdDeserializer<StrictMode>(StrictMode::class.jav
     private fun parseDeprecatedStrictMode(valueAsString: String): StrictMode {
         logger.warn(
             """
-            |You use deprecated strict_mode configuration: [true, false].
-            |This API will be deleted in the next major version.
-            |Replace `true` by `all_success`, `false` by `any_success`. Look at documentation for details. 
+            |You are using deprecated strict_mode configuration: [true, false].
+            |This API will be removed in 0.7.0.
+            |Replace `true` with `all_success`, `false` with `any_success`. See documentation for details. 
         """.trimMargin()
         )
         val value: Boolean = requireNotNull(valueAsString.toBoolean()) {
