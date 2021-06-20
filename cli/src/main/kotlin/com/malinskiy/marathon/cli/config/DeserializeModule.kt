@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.malinskiy.marathon.cli.args.FileVendorConfiguration
 import com.malinskiy.marathon.cli.config.deserialize.AnalyticsConfigurationDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.BatchingStrategyDeserializer
+import com.malinskiy.marathon.cli.config.deserialize.ExecutionStrategyDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.ExecutionTimeSortingStrategyDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.FileVendorConfigurationDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.FixedSizeBatchingStrategyDeserializer
@@ -17,19 +18,18 @@ import com.malinskiy.marathon.cli.config.deserialize.RetryStrategyDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.ScreenRecordingPolicyDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.ShardingStrategyDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.SortingStrategyDeserializer
-import com.malinskiy.marathon.cli.config.deserialize.StrictModeDeserializer
 import com.malinskiy.marathon.cli.config.deserialize.TestFilterDeserializer
 import com.malinskiy.marathon.cli.config.time.InstantTimeProvider
 import com.malinskiy.marathon.execution.AnalyticsConfiguration
 import com.malinskiy.marathon.execution.TestFilter
 import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
 import com.malinskiy.marathon.execution.strategy.BatchingStrategy
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.execution.strategy.FlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.PoolingStrategy
 import com.malinskiy.marathon.execution.strategy.RetryStrategy
 import com.malinskiy.marathon.execution.strategy.ShardingStrategy
 import com.malinskiy.marathon.execution.strategy.SortingStrategy
-import com.malinskiy.marathon.execution.strategy.StrictMode
 import com.malinskiy.marathon.execution.strategy.impl.batching.FixedSizeBatchingStrategy
 import com.malinskiy.marathon.execution.strategy.impl.flakiness.ProbabilityBasedFlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.impl.sorting.ExecutionTimeSortingStrategy
@@ -64,6 +64,6 @@ class DeserializeModule(instantTimeProvider: InstantTimeProvider) : SimpleModule
         addDeserializer(TestFilter::class.java, TestFilterDeserializer())
         addDeserializer(FileVendorConfiguration::class.java, FileVendorConfigurationDeserializer())
         addDeserializer(ScreenRecordingPolicy::class.java, ScreenRecordingPolicyDeserializer())
-        addDeserializer(StrictMode::class.java, StrictModeDeserializer())
+        addDeserializer(ExecutionStrategy::class.java, ExecutionStrategyDeserializer())
     }
 }

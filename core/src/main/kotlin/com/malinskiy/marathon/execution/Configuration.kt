@@ -2,12 +2,12 @@ package com.malinskiy.marathon.execution
 
 import com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy
 import com.malinskiy.marathon.execution.strategy.BatchingStrategy
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.execution.strategy.FlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.PoolingStrategy
 import com.malinskiy.marathon.execution.strategy.RetryStrategy
 import com.malinskiy.marathon.execution.strategy.ShardingStrategy
 import com.malinskiy.marathon.execution.strategy.SortingStrategy
-import com.malinskiy.marathon.execution.strategy.StrictMode
 import com.malinskiy.marathon.execution.strategy.impl.batching.IsolateBatchingStrategy
 import com.malinskiy.marathon.execution.strategy.impl.flakiness.IgnoreFlakinessStrategy
 import com.malinskiy.marathon.execution.strategy.impl.pooling.OmniPoolingStrategy
@@ -21,7 +21,7 @@ private const val DEFAULT_BATCH_EXECUTION_TIMEOUT_MILLIS: Long = 1800_000 //30 m
 private const val DEFAULT_OUTPUT_TIMEOUT_MILLIS: Long = 300_000 //5 min
 private const val DEFAULT_DEVICE_INITIALIZATION_TIMEOUT_MILLIS = 180_000L
 
-data class Configuration constructor(
+data class Configuration internal constructor(
     val name: String,
     val outputDir: File,
 
@@ -37,7 +37,7 @@ data class Configuration constructor(
     val ignoreFailures: Boolean,
     val isCodeCoverageEnabled: Boolean,
     val fallbackToScreenshots: Boolean,
-    val strictMode: StrictMode,
+    val executionStrategy: ExecutionStrategy,
     val uncompletedTestRetryQuota: Int,
 
     val testClassRegexes: Collection<Regex>,
@@ -72,7 +72,7 @@ data class Configuration constructor(
         ignoreFailures: Boolean?,
         isCodeCoverageEnabled: Boolean?,
         fallbackToScreenshots: Boolean?,
-        strictMode: StrictMode?,
+        executionStrategy: ExecutionStrategy?,
         uncompletedTestRetryQuota: Int?,
 
         testClassRegexes: Collection<Regex>?,
@@ -105,7 +105,7 @@ data class Configuration constructor(
                 ignoreFailures = ignoreFailures ?: false,
                 isCodeCoverageEnabled = isCodeCoverageEnabled ?: false,
                 fallbackToScreenshots = fallbackToScreenshots ?: false,
-                strictMode = strictMode ?: StrictMode.ANY_SUCCESS,
+                executionStrategy = executionStrategy ?: ExecutionStrategy.ANY_SUCCESS,
                 uncompletedTestRetryQuota = uncompletedTestRetryQuota ?: Integer.MAX_VALUE,
                 testClassRegexes = testClassRegexes ?: listOf(Regex("^((?!Abstract).)*Test[s]*$")),
                 includeSerialRegexes = includeSerialRegexes ?: emptyList(),
@@ -134,7 +134,7 @@ data class Configuration constructor(
             "ignoreFailures" to ignoreFailures.toString(),
             "isCodeCoverageEnabled" to isCodeCoverageEnabled.toString(),
             "fallbackToScreenshots" to fallbackToScreenshots.toString(),
-            "strictMode" to strictMode.toString(),
+            "executionStrategy" to executionStrategy.toString(),
             "testClassRegexes" to testClassRegexes.toString(),
             "includeSerialRegexes" to includeSerialRegexes.toString(),
             "excludeSerialRegexes" to excludeSerialRegexes.toString(),

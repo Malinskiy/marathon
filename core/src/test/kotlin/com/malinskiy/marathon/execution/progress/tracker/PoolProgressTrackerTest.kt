@@ -1,7 +1,7 @@
 package com.malinskiy.marathon.execution.progress.tracker
 
 import com.malinskiy.marathon.execution.Configuration
-import com.malinskiy.marathon.execution.strategy.StrictMode
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.test.Mocks
 import com.malinskiy.marathon.test.StubDeviceProvider
 import com.malinskiy.marathon.test.TestVendorConfiguration
@@ -18,7 +18,7 @@ class PoolProgressTrackerTest {
         metaProperties = emptyList()
     )
 
-    private fun createConfiguration(strictMode: StrictMode): Configuration {
+    private fun createConfiguration(executionStrategy: ExecutionStrategy): Configuration {
         return Configuration(
             name = "",
             outputDir = File(""),
@@ -33,7 +33,7 @@ class PoolProgressTrackerTest {
             ignoreFailures = null,
             isCodeCoverageEnabled = null,
             fallbackToScreenshots = null,
-            strictMode = strictMode,
+            executionStrategy = executionStrategy,
             uncompletedTestRetryQuota = null,
             testClassRegexes = null,
             includeSerialRegexes = null,
@@ -50,7 +50,7 @@ class PoolProgressTrackerTest {
 
     @Test
     fun nonStrictMode_case1() {
-        val tracker = PoolProgressTracker(createConfiguration(strictMode = StrictMode.ANY_SUCCESS))
+        val tracker = PoolProgressTracker(createConfiguration(executionStrategy = ExecutionStrategy.ANY_SUCCESS))
         tracker.testStarted(test)
         tracker.testPassed(test)
         tracker.testFailed(test)
@@ -61,7 +61,7 @@ class PoolProgressTrackerTest {
 
     @Test
     fun strictMode_case1() {
-        val tracker = PoolProgressTracker(createConfiguration(strictMode = StrictMode.ALL_SUCCESS))
+        val tracker = PoolProgressTracker(createConfiguration(executionStrategy = ExecutionStrategy.ALL_SUCCESS))
         tracker.testStarted(test)
         tracker.testPassed(test)
         tracker.testFailed(test)

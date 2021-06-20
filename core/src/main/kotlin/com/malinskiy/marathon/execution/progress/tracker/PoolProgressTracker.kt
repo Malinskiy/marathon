@@ -2,7 +2,7 @@ package com.malinskiy.marathon.execution.progress.tracker
 
 import com.malinskiy.marathon.actor.StateMachine
 import com.malinskiy.marathon.execution.Configuration
-import com.malinskiy.marathon.execution.strategy.StrictMode
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.test.Test
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -25,10 +25,10 @@ class PoolProgressTracker(private val configuration: Configuration) {
         }
         state<ProgressTestState.Passed> {
             on<ProgressEvent.Failed> {
-                when (configuration.strictMode) {
-                    StrictMode.ANY_SUCCESS -> dontTransition()
-                    StrictMode.ANY_FAIL,
-                    StrictMode.ALL_SUCCESS -> transitionTo(ProgressTestState.Failed)
+                when (configuration.executionStrategy) {
+                    ExecutionStrategy.ANY_SUCCESS -> dontTransition()
+                    ExecutionStrategy.ANY_FAIL,
+                    ExecutionStrategy.ALL_SUCCESS -> transitionTo(ProgressTestState.Failed)
                 }
             }
             on<ProgressEvent.Ignored> {
@@ -37,10 +37,10 @@ class PoolProgressTracker(private val configuration: Configuration) {
         }
         state<ProgressTestState.Failed> {
             on<ProgressEvent.Passed> {
-                when (configuration.strictMode) {
-                    StrictMode.ANY_SUCCESS -> transitionTo(ProgressTestState.Passed)
-                    StrictMode.ANY_FAIL,
-                    StrictMode.ALL_SUCCESS -> dontTransition()
+                when (configuration.executionStrategy) {
+                    ExecutionStrategy.ANY_SUCCESS -> transitionTo(ProgressTestState.Passed)
+                    ExecutionStrategy.ANY_FAIL,
+                    ExecutionStrategy.ALL_SUCCESS -> dontTransition()
                 }
             }
 

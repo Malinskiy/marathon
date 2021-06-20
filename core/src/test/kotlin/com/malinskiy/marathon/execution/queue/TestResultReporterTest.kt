@@ -7,7 +7,7 @@ import com.malinskiy.marathon.execution.Configuration
 import com.malinskiy.marathon.execution.TestResult
 import com.malinskiy.marathon.execution.TestShard
 import com.malinskiy.marathon.execution.TestStatus
-import com.malinskiy.marathon.execution.strategy.StrictMode
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.generateTest
 import com.malinskiy.marathon.test.Mocks
 import com.malinskiy.marathon.test.StubDeviceProvider
@@ -42,7 +42,7 @@ class TestResultReporterTest {
         ignoreFailures = null,
         isCodeCoverageEnabled = null,
         fallbackToScreenshots = null,
-        strictMode = null,
+        executionStrategy = null,
         uncompletedTestRetryQuota = null,
         testClassRegexes = null,
         includeSerialRegexes = null,
@@ -55,7 +55,7 @@ class TestResultReporterTest {
         analyticsTracking = false,
         deviceInitializationTimeoutMillis = null
     )
-    private val strictConfig = defaultConfig.copy(strictMode = StrictMode.ALL_SUCCESS)
+    private val strictConfig = defaultConfig.copy(executionStrategy = ExecutionStrategy.ALL_SUCCESS)
     val test = generateTest()
     private val poolId = DevicePoolId("test")
 

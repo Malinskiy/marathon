@@ -16,6 +16,7 @@ import com.malinskiy.marathon.android.defaultInitTimeoutMillis
 import com.malinskiy.marathon.di.marathonStartKoin
 import com.malinskiy.marathon.exceptions.ExceptionsReporter
 import com.malinskiy.marathon.execution.Configuration
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.extensions.extractApplication
 import com.malinskiy.marathon.extensions.extractTestApplication
 import com.malinskiy.marathon.log.MarathonLogging
@@ -44,6 +45,7 @@ import javax.inject.Inject
 private val log = MarathonLogging.logger {}
 
 open class MarathonRunTask @Inject constructor(objects: ObjectFactory) : DefaultTask(), VerificationTask {
+
     @Input
     val flavorName: Property<String> = objects.property()
 
@@ -94,7 +96,7 @@ open class MarathonRunTask @Inject constructor(objects: ObjectFactory) : Default
             extensionConfig.ignoreFailures,
             extensionConfig.isCodeCoverageEnabled,
             extensionConfig.fallbackToScreenshots,
-            extensionConfig.strictMode,
+            extensionConfig.getExecutionStrategy(),
             extensionConfig.uncompletedTestRetryQuota,
             extensionConfig.testClassRegexes?.map { it.toRegex() },
             extensionConfig.includeSerialRegexes?.map { it.toRegex() },
@@ -129,6 +131,28 @@ open class MarathonRunTask @Inject constructor(objects: ObjectFactory) : Default
         } finally {
             stopKoin()
         }
+    }
+
+    private fun MarathonExtension.getExecutionStrategy(): ExecutionStrategy? {
+        val extensionStrictMode = strictMode
+        val extensionExecutionStrategy = executionStrategy
+        var resultExecutionStrategy: ExecutionStrategy? = null
+        if (extensionStrictMode != null) {
+            logger.warn("""
+                |You are using deprecated strict_mode configuration: [true, false].
+                |This API will be removed in 0.7.0.
+                |Replace `true` with `execution_strategy: all_success`, `false` with `execution_strategy: any_success`. See documentation for details."""
+            )
+            resultExecutionStrategy = when (extensionStrictMode) {
+                extensionStrictMode -> ExecutionStrategy.ALL_SUCCESS
+                else -> ExecutionStrategy.ANY_SUCCESS
+            }
+        }
+
+        if (extensionExecutionStrategy != null) {
+            resultExecutionStrategy = extensionExecutionStrategy
+        }
+        return resultExecutionStrategy
     }
 
     private fun createAndroidConfiguration(

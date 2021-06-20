@@ -8,6 +8,7 @@ import com.malinskiy.marathon.cli.args.FileIOSConfiguration
 import com.malinskiy.marathon.cli.args.environment.EnvironmentReader
 import com.malinskiy.marathon.exceptions.ConfigurationException
 import com.malinskiy.marathon.execution.Configuration
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.log.MarathonLogging
 import com.malinskiy.marathon.vendor.VendorConfiguration
 import org.apache.commons.text.StringSubstitutor
@@ -55,7 +56,7 @@ class ConfigFactory(private val mapper: ObjectMapper) {
             ignoreFailures = config.ignoreFailures,
             isCodeCoverageEnabled = config.isCodeCoverageEnabled,
             fallbackToScreenshots = config.fallbackToScreenshots,
-            strictMode = config.strictMode,
+            executionStrategy = parseExecutionStrategy(config),
             uncompletedTestRetryQuota = config.uncompletedTestRetryQuota,
             testClassRegexes = config.testClassRegexes,
             includeSerialRegexes = config.includeSerialRegexes,
@@ -68,6 +69,28 @@ class ConfigFactory(private val mapper: ObjectMapper) {
             analyticsTracking = config.analyticsTracking,
             deviceInitializationTimeoutMillis = config.deviceInitializationTimeoutMillis
         )
+    }
+
+    private fun parseExecutionStrategy(config: FileConfiguration): ExecutionStrategy? {
+        val configStrictMode = config.strictMode
+        val configExecutionStrategy = config.executionStrategy
+        var executionStrategy: ExecutionStrategy? = null
+        if (configStrictMode != null) {
+            executionStrategy = when {
+                configStrictMode -> ExecutionStrategy.ALL_SUCCESS
+                else -> ExecutionStrategy.ANY_SUCCESS
+            }
+            logger.warn("""
+            |You are using deprecated strict_mode configuration: [true, false].
+            |This API will be removed in 0.7.0.
+            |Replace `true` with `execution_strategy: all_success`, `false` with `execution_strategy: any_success`. See documentation for details."""
+            )
+        }
+        if (configExecutionStrategy != null) {
+            executionStrategy = configExecutionStrategy
+        }
+
+        return executionStrategy
     }
 
     private fun readConfigFile(configFile: File): FileConfiguration? {

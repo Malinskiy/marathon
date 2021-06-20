@@ -19,7 +19,7 @@ import com.malinskiy.marathon.android.executor.listeners.AndroidTestRunListener
 import com.malinskiy.marathon.android.extension.isIgnored
 import com.malinskiy.marathon.android.model.TestIdentifier
 import com.malinskiy.marathon.execution.Configuration
-import com.malinskiy.marathon.execution.strategy.StrictMode
+import com.malinskiy.marathon.execution.strategy.ExecutionStrategy
 import com.malinskiy.marathon.log.MarathonLogging
 import com.malinskiy.marathon.test.Test
 import com.malinskiy.marathon.test.TestBatch
@@ -70,8 +70,8 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
                             return@withTimeoutOrNull
                         } else {
                             processEvents(update, listener)
-                            when (configuration.strictMode) {
-                                StrictMode.ANY_FAIL -> {
+                            when (configuration.executionStrategy) {
+                                ExecutionStrategy.ANY_FAIL -> {
                                     val hasFailed = update
                                         .filterIsInstance<TestRunFailed>()
                                         .isNotEmpty()
