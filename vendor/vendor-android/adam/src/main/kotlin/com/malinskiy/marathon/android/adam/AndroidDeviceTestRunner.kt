@@ -76,7 +76,7 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice) {
                                         .filterIsInstance<TestRunFailed>()
                                         .isNotEmpty()
                                     if (hasFailed) {
-                                        listener.testRunStoppedFailFast(0)
+                                        listener.testRunStopped(0)
                                         return@withTimeoutOrNull
                                     }
                                 }

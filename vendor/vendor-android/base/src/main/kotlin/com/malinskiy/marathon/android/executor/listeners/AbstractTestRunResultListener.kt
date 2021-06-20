@@ -6,7 +6,6 @@ import com.malinskiy.marathon.execution.TestBatchResults
 import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_END
 import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_FAILED
 import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_STOPPED
-import com.malinskiy.marathon.execution.TestBatchResults.RunCompletionReason.RUN_STOPPED_FAIL_FAST
 import com.malinskiy.marathon.time.Timer
 
 abstract class AbstractTestRunResultListener(timer: Timer) : NoOpTestRunListener() {
@@ -49,11 +48,6 @@ abstract class AbstractTestRunResultListener(timer: Timer) : NoOpTestRunListener
     override suspend fun testRunEnded(elapsedTime: Long, runMetrics: Map<String, String>) {
         runResult.testRunEnded(elapsedTime, runMetrics)
         handleTestRunResults(runResult, RUN_END)
-    }
-
-    override suspend fun testRunStoppedFailFast(elapsedTime: Long) {
-        runResult.testRunStopped(elapsedTime)
-        handleTestRunResults(runResult, RUN_STOPPED_FAIL_FAST)
     }
 
     abstract suspend fun handleTestRunResults(

@@ -21,7 +21,5 @@ interface AndroidTestRunListener {
 
     suspend fun testRunStopped(elapsedTime: Long)
 
-    suspend fun testRunStoppedFailFast(elapsedTime: Long)
-
     suspend fun testRunEnded(elapsedTime: Long, runMetrics: Map<String, String>)
 }

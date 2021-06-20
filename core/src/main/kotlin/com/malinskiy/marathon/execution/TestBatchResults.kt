@@ -13,7 +13,6 @@ data class TestBatchResults(
     enum class RunCompletionReason {
         RUN_FAILED,
         RUN_STOPPED,
-        RUN_END,
-        RUN_STOPPED_FAIL_FAST
+        RUN_END
     }
 }
