@@ -1,10 +1,11 @@
 package com.malinskiy.marathon.ios
 
 import com.malinskiy.marathon.execution.Configuration
-import com.malinskiy.marathon.test.Test as MarathonTest
+import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldContainSame
 import org.junit.jupiter.api.Test
 import java.io.File
+import com.malinskiy.marathon.test.Test as MarathonTest
 
 class IOSTestParserTest {
     private val parser = IOSTestParser()
@@ -54,7 +55,9 @@ class IOSTestParserTest {
 
     @Test
     fun `should return accurate list of tests`() {
-        val extractedTests = parser.extract(configuration)
+        val extractedTests = runBlocking {
+            parser.extract(configuration)
+        }
 
         extractedTests shouldContainSame listOf(
             MarathonTest("sample-appUITests", "StoryboardTests", "testButton", emptyList()),

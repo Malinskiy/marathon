@@ -36,7 +36,7 @@ import java.net.ConnectException
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.CoroutineContext
 
-private const val DEFAULT_WAIT_FOR_DEVICES_SLEEP_TIME = 500L
+const val DEFAULT_WAIT_FOR_DEVICES_SLEEP_TIME = 500L
 
 class AdamDeviceProvider(
     val configuration: Configuration,

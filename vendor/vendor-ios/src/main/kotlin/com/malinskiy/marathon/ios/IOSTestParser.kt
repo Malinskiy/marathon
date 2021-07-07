@@ -19,7 +19,7 @@ class IOSTestParser : TestParser {
      *  specified in Marathonfile. When not specified, starts in working directory. Result excludes any tests
      *  marked as skipped in `xctestrun` file.
      */
-    override fun extract(configuration: Configuration): List<Test> {
+    override suspend fun extract(configuration: Configuration): List<Test> {
         val vendorConfiguration = configuration.vendorConfiguration as? IOSConfiguration
             ?: throw IllegalStateException("Expected IOS configuration")
 

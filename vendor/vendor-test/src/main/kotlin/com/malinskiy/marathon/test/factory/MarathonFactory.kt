@@ -17,7 +17,9 @@ class MarathonFactory {
 
     var timer: Timer? = null
 
-    fun configuration(block: ConfigurationFactory.() -> Unit) = configurationFactory.apply(block)
+    suspend fun configuration(block: suspend ConfigurationFactory.() -> Unit) {
+        block(configurationFactory)
+    }
 
     fun build(): Marathon {
         val configuration = configurationFactory.build()

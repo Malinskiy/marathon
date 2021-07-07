@@ -10,7 +10,7 @@ import com.malinskiy.marathon.test.MetaProperty
 import com.malinskiy.marathon.test.Test
 
 class AndroidTestParser(private val testBundleIdentifier: AndroidTestBundleIdentifier) : TestParser {
-    override fun extract(configuration: Configuration): List<Test> {
+    override suspend fun extract(configuration: Configuration): List<Test> {
         val androidConfiguration = configuration.vendorConfiguration as AndroidConfiguration
         val testBundles = androidConfiguration.testBundlesCompat()
         return testBundles.flatMap { bundle ->

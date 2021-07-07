@@ -2,6 +2,7 @@ package com.malinskiy.marathon.android
 
 import com.malinskiy.marathon.execution.Configuration
 import com.malinskiy.marathon.test.MetaProperty
+import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldEqual
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -46,7 +47,9 @@ class AndroidTestParserTest {
 
     @Test
     fun `should return proper list of test methods`() {
-        val extractedTests = parser.extract(configuration)
+        val extractedTests = runBlocking {
+            parser.extract(configuration)
+        }
         extractedTests shouldEqual listOf(
             MarathonTest(
                 "com.example", "MainActivityTest", "testText",

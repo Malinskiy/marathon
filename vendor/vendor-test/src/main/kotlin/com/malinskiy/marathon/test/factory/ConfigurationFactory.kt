@@ -42,7 +42,7 @@ class ConfigurationFactory {
     var screenRecordingPolicy: ScreenRecordingPolicy? = null
     var deviceInitializationTimeoutMillis: Long? = null
 
-    fun tests(block: () -> List<Test>) {
+    suspend fun tests(block: () -> List<Test>) {
         val testParser = vendorConfiguration.testParser()
         whenever(testParser.extract(any())).thenReturn(block.invoke())
     }

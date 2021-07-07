@@ -158,7 +158,14 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice, private val
         testBatch: TestBatch
     ): TestRunnerRequest {
         val tests = testBatch.tests.map {
-            "${it.pkg}.${it.clazz}#${it.method}"
+            if(it.method != "null") {
+                "${it.pkg}.${it.clazz}#${it.method.bashEscape()}"
+            } else {
+                /**
+                 * Special case for tests without any methods
+                 */
+                "${it.pkg}.${it.clazz}"
+            }
         }
 
         logger.debug { "tests = ${tests.toList()}" }
@@ -179,6 +186,10 @@ class AndroidDeviceTestRunner(private val device: AdamAndroidDevice, private val
             socketIdleTimeout = Long.MAX_VALUE
         )
     }
+}
+
+private fun String.bashEscape(): String {
+    return replace(" ", "\\ ")
 }
 
 private fun com.malinskiy.adam.request.testrunner.TestIdentifier.toMarathonTestIdentifier(): TestIdentifier {
