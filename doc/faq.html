@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Marathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cross-platform test runner written for Android and iOS projects">
+    <meta name="keywords" content="android, testing, testing-tool, test-runner, espresso, uitest, uitesting, uitests, ios, marathon, xcrun, instrumentation, instrumentation-tests, gradle, parallel, performance">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+          type="text/css">
+    <!-- Animated -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="shortcut icon" href="/marathon/img/favicon.png">
+    <!-- highlight  css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/styles/solarized-dark.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" type="text/css" href="/marathon/css/marathon.css">
+    <!-- tabs -->
+    <link rel="stylesheet" type="text/css" href="/marathon/css/tabs.css">
+
+    <!-- Diagrams support -->
+    <script src="/marathon/js/dagre.min.js"></script>
+    <script src="/marathon/js/lodash.min.js"></script>
+    <script src="/marathon/js/nomnoml.js"></script>
+    <script src="/marathon/js/diagrams.js"></script>
+
+    
+    <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-131132823-2', 'auto');
+    ga('send', 'pageview');
+
+
+</script>
+
+    
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div>
+      <a class="brand" href="/marathon/">
+            <img src="/marathon/img/marathon-brand-sidebar.svg" alt="">
+      </a>
+      <a href="javascript:void(0)" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <ul class="sidebar-nav">
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>General</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="1">
+              <a href="/marathon/doc/getting-started.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Getting Started</span>
+              </a>
+            </li>
+            
+            <li data-order="2">
+              <a href="/marathon/doc/downloading.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Downloading</span>
+              </a>
+            </li>
+            
+            <li data-order="3">
+              <a href="/marathon/doc/configuration.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Options</span>
+              </a>
+            </li>
+            
+            <li data-order="5">
+              <a href="/marathon/doc/executing.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Executing</span>
+              </a>
+            </li>
+            
+            <li data-order="6">
+              <a href="/marathon/doc/reports.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Reporting</span>
+              </a>
+            </li>
+            
+            <li data-order="7">
+              <a href="/marathon/doc/faq.html">
+                  <i class="fa fa-circle"></i>
+                  <span>FAQ</span>
+              </a>
+            </li>
+            
+            <li data-order="8">
+              <a href="/marathon/doc/special-thanks.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Special thanks</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Reference</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="">
+              <a href="/marathon/ref/samples.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Samples</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Vendor extensions</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="1">
+              <a href="/marathon/ven/android.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Android</span>
+              </a>
+            </li>
+            
+            <li data-order="2">
+              <a href="/marathon/ven/ios.html">
+                  <i class="fa fa-circle"></i>
+                  <span>iOS</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Developers</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="2">
+              <a href="/marathon/dev/contributing.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Contributing</span>
+              </a>
+            </li>
+            
+            <li data-order="3">
+              <a href="/marathon/dev/vision.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Vision</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+    </ul>
+
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <a href="javascript:void(0)" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="search-wrapper">
+            <input class="search" id="docsearch" placeholder="Search documentation..." type="search">
+        </div>
+    </div>
+    <div class="doc-content">
+        
+        <h1 id="how-to-investigate-device-specific-problems">How to investigate device-specific problems?</h1>
+<p>Sometimes the execution device is incorrectly configured or doesn’t work as expected. You have several options to identify such problems:</p>
+<ul>
+  <li>grafana dashboard and see the distribution of test failures by device</li>
+  <li>Timeline report</li>
+  <li>Allure’s timeline report</li>
+</ul>
+
+<h1 id="how-to-check-overall-test-flakiness">How to check overall test flakiness?</h1>
+<p>It’s quite easy to check the overall status of your tests if you navigate to the grafana dashboard based on the InfluxDB data and check
+ test pass probability distribution. Ideally you should have a lot of tests either at the 1 bucket and 0. Everything in-between affects the
+ test performance drastically especially the buckets closer to the 1 like <em>[0.9 - 1.0)</em> so it’s much more desirable to have tests which have
+ low probability of passing instead of the tests which have 0.9999 probability of passing (<em>sometimes</em> fails).</p>
+
+<h1 id="how-to-check-for-common-underlying-problems-in-tests">How to check for common underlying problems in tests?</h1>
+<p>Assuming your common problem throws the same message in the exception in different tests you can quickly understand this if you
+ navigate to <strong>Categories</strong> tab in the Allure report and check the number of occurrences on the right for each problem.</p>
+
+<h1 id="how-to-check-quality-by-specific-featureteamepic">How to check quality by specific feature/team/epic?</h1>
+<p>Marathon supports tests that have meta-information such as Epic, Team or Feature from allure. This makes it possible to understand, for
+ example, if a particular test corresponds to a specific feature. Allure report visualises this information and makes it possible to
+ navigate all of them using the <strong>Behaviors</strong> page.</p>
+
+<h1 id="how-to-check-the-load-distribution-of-test-run">How to check the load distribution of test run?</h1>
+<p>Sometimes your devices might not be utilised during all of the execution time. To check this you need to have a timeline. This is available
+ either in timeline report or allure. Keep in mind that allure report doesn’t contain the retries whereas the marathon’s timeline report
+ does.</p>
+
+<h1 id="how-to-check-the-retry-count-of-a-test">How to check the retry count of a test?</h1>
+<p>Retries can be checked in the allure report. Test pass probability on the other hand is the reason why we do retries so grafana dashboard is
+ another option you can check for the expected and observed retries.</p>
+
+<h1 id="my-logsscreenshots-are-missing-from-the-html-report">My logs/screenshots are missing from the html report</h1>
+<p>If you’re opening your reports with <code>file://</code> schema then it’s a known issue: modern browsers reject our requests to additional files such 
+ as logs or videos for security reasons. CI systems usually have webserver to host these files, but local environment can also start a 
+ webserver for example using IntelliJ based IDEs by right clicking on the html file -&gt; open in browser. Or doing something like 
+ <code>python3 -m http.server 8000</code> in the directory of the report and navigating to <code>localhost</code>.</p>
+
+<h1 id="can-i-run-my-android-tests-if-my-emulators-are-on-a-remote-instance">Can I run my Android tests if my emulator(s) are on a remote instance?</h1>
+<p>Of course, you can do this by connecting your remote Android device (emulator or real device) by executing <code>adb connect $IP_OF_DEVICE</code>. 
+ Assuming you have enabled adb over TCP/IP properly you should be able to execute your test on a remote Android device (or a hundred of 
+ devices depending on how many you connect)</p>
+
+<h1 id="how-to-execute-only-a-single-test-case">How to execute only a single test case?</h1>
+<p>This is possible and will depend on the distribution you’re using.</p>
+
+<ul class="tab" data-tab="63d111c9-738e-4ada-a48e-2d7b5d750190">
+    
+        <li class="active">
+            <a href="">CLI </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="63d111c9-738e-4ada-a48e-2d7b5d750190">
+    
+        <li class="active">
+<pre><code class="language-yaml">filteringConfiguration:
+  allowlist:
+  - type: "fully-qualified-class-name"
+    regex: "com\.example\.MySingleTest"
+
+</code></pre>
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">filteringConfiguration { 
+    allowlist { 
+        add(com.malinskiy.marathon.execution.FullyQualifiedClassnameFilter("com\\.example\\.MySingleTest".toRegex()))
+    }
+}
+</code></pre>
+</li>
+    
+</ul>
+
+<h1 id="some-of-my-test-artifacts-videos-screenshots-etc-are-missing">Some of my test artifacts (videos, screenshots, etc) are missing!</h1>
+<p>Due to the nature of marathon to device connection being unreliable, we can not guarantee that every single artifact is going to be there.
+ Marathon tries best to pull necessary information from the device, but sometimes the device is unresponsive or just stopped working at all.
+ If the test passed before it died marathon considers the test to be passing and resumes the execution.</p>
+
+<h1 id="my-test-execution-show-100-eg-110-progress-whats-wrong">My test execution show 100%+ (e.g. 110%) progress. What’s wrong?</h1>
+<p>This is an edge case with parameterized tests and how they’re identified + executed. Unfortunetely, we can’t change this without significant effort</p>
+
+    </div>
+</div>
+
+</div>
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/highlight.min.js"></script>
+<script> hljs.initHighlighting(); </script>
+<!-- Docsearch -->
+<script src="/marathon/js/docsearch.min.js" type="text/javascript"></script>
+<!-- Touch gesture support -->
+<script src="/marathon/js/hammer.min.js"></script>
+<!-- Custom scripts for this template -->
+<script src="/marathon/js/functions.js"></script>
+<script src="/marathon/js/tabs.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Marathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cross-platform test runner written for Android and iOS projects">
+    <meta name="keywords" content="android, testing, testing-tool, test-runner, espresso, uitest, uitesting, uitests, ios, marathon, xcrun, instrumentation, instrumentation-tests, gradle, parallel, performance">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+          type="text/css">
+    <!-- Animated -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="shortcut icon" href="/marathon/img/favicon.png">
+    <!-- highlight  css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/styles/solarized-dark.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" type="text/css" href="/marathon/css/marathon.css">
+    <!-- tabs -->
+    <link rel="stylesheet" type="text/css" href="/marathon/css/tabs.css">
+
+    <!-- Diagrams support -->
+    <script src="/marathon/js/dagre.min.js"></script>
+    <script src="/marathon/js/lodash.min.js"></script>
+    <script src="/marathon/js/nomnoml.js"></script>
+    <script src="/marathon/js/diagrams.js"></script>
+
+    
+    <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-131132823-2', 'auto');
+    ga('send', 'pageview');
+
+
+</script>
+
+    
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div>
+      <a class="brand" href="/marathon/">
+            <img src="/marathon/img/marathon-brand-sidebar.svg" alt="">
+      </a>
+      <a href="javascript:void(0)" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <ul class="sidebar-nav">
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>General</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="1">
+              <a href="/marathon/doc/getting-started.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Getting Started</span>
+              </a>
+            </li>
+            
+            <li data-order="2">
+              <a href="/marathon/doc/downloading.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Downloading</span>
+              </a>
+            </li>
+            
+            <li data-order="3">
+              <a href="/marathon/doc/configuration.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Options</span>
+              </a>
+            </li>
+            
+            <li data-order="5">
+              <a href="/marathon/doc/executing.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Executing</span>
+              </a>
+            </li>
+            
+            <li data-order="6">
+              <a href="/marathon/doc/reports.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Reporting</span>
+              </a>
+            </li>
+            
+            <li data-order="7">
+              <a href="/marathon/doc/faq.html">
+                  <i class="fa fa-circle"></i>
+                  <span>FAQ</span>
+              </a>
+            </li>
+            
+            <li data-order="8">
+              <a href="/marathon/doc/special-thanks.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Special thanks</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Reference</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="">
+              <a href="/marathon/ref/samples.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Samples</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Vendor extensions</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="1">
+              <a href="/marathon/ven/android.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Android</span>
+              </a>
+            </li>
+            
+            <li data-order="2">
+              <a href="/marathon/ven/ios.html">
+                  <i class="fa fa-circle"></i>
+                  <span>iOS</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Developers</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="2">
+              <a href="/marathon/dev/contributing.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Contributing</span>
+              </a>
+            </li>
+            
+            <li data-order="3">
+              <a href="/marathon/dev/vision.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Vision</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+    </ul>
+
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <a href="javascript:void(0)" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="search-wrapper">
+            <input class="search" id="docsearch" placeholder="Search documentation..." type="search">
+        </div>
+    </div>
+    <div class="doc-content">
+        
+        <p>Configuration for CLI is done using the YAML formatted configuration file which is placed by default in the root of the project and named as
+<strong>Marathonfile</strong>.</p>
+
+<p>Below is an example of Marathonfile (without the vendor module configuration:</p>
+
+<pre><code class="language-yaml">name: "sample-app tests"
+outputDir: "./marathon"
+analyticsConfiguration:
+  influx:
+    url: "http://influx.svc.cluster.local:8086"
+    user: "root"
+    password: "root"
+    dbName: "marathon"
+poolingStrategy:
+  - type: "omni"
+shardingStrategy:
+  type: "count"
+  count: 5
+sortingStrategy:
+  type: "success-rate"
+  timeLimit: "2015-03-14T09:26:53.590Z"
+batchingStrategy:
+  type: "fixed-size"
+  size: 5
+flakinessStrategy:
+  type: "probability"
+  minSuccessRate: 0.7
+  maxCount: 3
+  timeLimit: "2015-03-14T09:26:53.590Z"
+retryStrategy:
+  type: "fixed-quota"
+  totalAllowedRetryQuota: 100
+  retryPerTestQuota: 3
+</code></pre>
+
+<p>Each of these options is covered in detail in the section below. If you’re unsure how to properly format your options in Marathonfile take a
+look at the samples or take a look at the <a href="https://github.com/MarathonLabs/marathon/blob/develop/cli/src/main/kotlin/com/malinskiy/marathon/cli/config/ConfigFactory.kt">deserialisation logic</a> in the <em>cli</em> module of the project. Each option might have a default
+deserialiser from yaml or a custom one. Usually the custom deserialiser expects the type option to understand which type of strategy we need
+to instantiate.</p>
+
+<p>Configuration for gradle plugin is done via gradle only. It doesn’t support the CLI’s marathonfile. Here is an example of gradle config
+using Kotlin DSL:</p>
+
+<pre><code class="language-kotlin">marathon {
+  name = "sample-app tests"
+  baseOutputDir = "./marathon"
+  analytics {
+    influx {
+      url = "http://influx.svc.cluster.local:8086"
+      user = "root"
+      password = "root"
+      dbName = "marathon"
+    }
+  }
+  poolingStrategy {
+    operatingSystem = true
+  }
+  shardingStrategy {
+    countSharding {
+      count = 5
+    }
+  }
+  sortingStrategy {
+    executionTime {
+      percentile = 90.0
+      executionTime = Instant.now().minus(3, ChronoUnit.DAYS)
+    }
+  }
+  batchingStrategy {
+    fixedSize {
+      size = 10
+    }
+  }
+  flakinessStrategy {
+    probabilityBased {
+      minSuccessRate = 0.8
+      maxCount = 3
+      timeLimit = Instant.now().minus(30, ChronoUnit.DAYS)
+    }
+  }
+  retryStrategy {
+    fixedQuota {
+      totalAllowedRetryQuota = 200
+      retryPerTestQuota = 3
+    }
+  }
+  filteringConfiguration {
+    allowlist {
+      add(SimpleClassnameFilter(".*".toRegex()))
+    }
+    blocklist {
+      add(SimpleClassnameFilter("$^".toRegex()))
+    }
+  }
+  testClassRegexes = listOf("^((?!Abstract).)*Test$")
+  includeSerialRegexes = emptyList()
+  excludeSerialRegexes = emptyList()
+  uncompletedTestRetryQuota = 100
+  ignoreFailures = false
+  isCodeCoverageEnabled = false
+  fallbackToScreenshots = false
+  testOutputTimeoutMillis = 30_000
+  strictMode = false
+  debug = true
+  autoGrantPermission = true
+}
+</code></pre>
+
+<p>Here you will find a list of currently supported configuration parameters and examples of how to set them up. Keep in mind that some of the
+additional parameters might not be supported by all vendor modules. If you find that something doesn’t work - please submit an issue for a
+vendor module at fault.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#general-parameters" id="markdown-toc-general-parameters">General parameters</a>    <ul>
+      <li><a href="#test-run-configuration-name" id="markdown-toc-test-run-configuration-name">Test run configuration name</a></li>
+      <li><a href="#output-directory" id="markdown-toc-output-directory">Output directory</a></li>
+    </ul>
+  </li>
+  <li><a href="#analytics-configuration" id="markdown-toc-analytics-configuration">Analytics configuration</a>    <ul>
+      <li><a href="#disabled-analytics" id="markdown-toc-disabled-analytics">Disabled analytics</a></li>
+      <li><a href="#influxdb" id="markdown-toc-influxdb">InfluxDB</a></li>
+      <li><a href="#graphite" id="markdown-toc-graphite">Graphite</a></li>
+    </ul>
+  </li>
+  <li><a href="#execution-flow" id="markdown-toc-execution-flow">Execution flow</a>    <ul>
+      <li><a href="#pooling-strategy" id="markdown-toc-pooling-strategy">Pooling strategy</a>        <ul>
+          <li><a href="#omni-aka-one-huge-pool" id="markdown-toc-omni-aka-one-huge-pool">Omni a.k.a. one huge pool</a></li>
+          <li><a href="#by-abi" id="markdown-toc-by-abi">By abi</a></li>
+          <li><a href="#by-manufacturer" id="markdown-toc-by-manufacturer">By manufacturer</a></li>
+          <li><a href="#by-device-model" id="markdown-toc-by-device-model">By device model</a></li>
+          <li><a href="#by-os-version" id="markdown-toc-by-os-version">By OS version</a></li>
+        </ul>
+      </li>
+      <li><a href="#sharding-strategy" id="markdown-toc-sharding-strategy">Sharding strategy</a>        <ul>
+          <li><a href="#parallel-sharding" id="markdown-toc-parallel-sharding">Parallel sharding</a></li>
+          <li><a href="#count-sharding" id="markdown-toc-count-sharding">Count sharding</a></li>
+        </ul>
+      </li>
+      <li><a href="#sorting-strategy" id="markdown-toc-sorting-strategy">Sorting strategy</a>        <ul>
+          <li><a href="#no-sorting" id="markdown-toc-no-sorting">No sorting</a></li>
+          <li><a href="#success-rate-sorting" id="markdown-toc-success-rate-sorting">Success rate sorting</a></li>
+          <li><a href="#execution-time-sorting" id="markdown-toc-execution-time-sorting">Execution time sorting</a></li>
+        </ul>
+      </li>
+      <li><a href="#batching-strategy" id="markdown-toc-batching-strategy">Batching strategy</a>        <ul>
+          <li><a href="#isolate-batching" id="markdown-toc-isolate-batching">Isolate batching</a></li>
+          <li><a href="#fixed-size-batching" id="markdown-toc-fixed-size-batching">Fixed size batching</a></li>
+        </ul>
+      </li>
+      <li><a href="#flakiness-strategy" id="markdown-toc-flakiness-strategy">Flakiness strategy</a>        <ul>
+          <li><a href="#ignore-flakiness" id="markdown-toc-ignore-flakiness">Ignore flakiness</a></li>
+          <li><a href="#probability-based-flakiness-strategy" id="markdown-toc-probability-based-flakiness-strategy">Probability based flakiness strategy</a></li>
+        </ul>
+      </li>
+      <li><a href="#retry-strategy" id="markdown-toc-retry-strategy">Retry strategy</a>        <ul>
+          <li><a href="#no-retries" id="markdown-toc-no-retries">No retries</a></li>
+          <li><a href="#fixed-quota-retry-strategy" id="markdown-toc-fixed-quota-retry-strategy">Fixed quota retry strategy</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#additional-parameters" id="markdown-toc-additional-parameters">Additional parameters</a>    <ul>
+      <li><a href="#test-filtering-configuration" id="markdown-toc-test-filtering-configuration">Test filtering configuration</a>        <ul>
+          <li><a href="#filter-parameters" id="markdown-toc-filter-parameters">Filter parameters</a></li>
+          <li><a href="#regex-filtering" id="markdown-toc-regex-filtering">Regex filtering</a></li>
+          <li><a href="#values-filtering" id="markdown-toc-values-filtering">Values filtering</a></li>
+          <li><a href="#values-file-filtering" id="markdown-toc-values-file-filtering">Values file filtering</a></li>
+          <li><a href="#running-only-specific-tests" id="markdown-toc-running-only-specific-tests">Running only specific tests</a></li>
+          <li><a href="#more-examples" id="markdown-toc-more-examples">More examples</a></li>
+          <li><a href="#composition-filtering" id="markdown-toc-composition-filtering">Composition filtering</a></li>
+        </ul>
+      </li>
+      <li><a href="#fragmented-execution-of-tests" id="markdown-toc-fragmented-execution-of-tests">Fragmented execution of tests</a></li>
+      <li><a href="#test-class-regular-expression" id="markdown-toc-test-class-regular-expression">Test class regular expression</a></li>
+      <li><a href="#ignore-failures" id="markdown-toc-ignore-failures">Ignore failures</a></li>
+      <li><a href="#code-coverage" id="markdown-toc-code-coverage">Code coverage</a></li>
+      <li><a href="#test-output-timeout" id="markdown-toc-test-output-timeout">Test output timeout</a></li>
+      <li><a href="#test-batch-timeout" id="markdown-toc-test-batch-timeout">Test batch timeout</a></li>
+      <li><a href="#device-provider-init-timeout" id="markdown-toc-device-provider-init-timeout">Device provider init timeout</a></li>
+      <li><a href="#analytics-tracking" id="markdown-toc-analytics-tracking">Analytics tracking</a></li>
+      <li><a href="#uncompleted-test-retry-quota" id="markdown-toc-uncompleted-test-retry-quota">Uncompleted test retry quota</a></li>
+      <li><a href="#strict-mode" id="markdown-toc-strict-mode">Strict mode</a></li>
+      <li><a href="#debug-mode" id="markdown-toc-debug-mode">Debug mode</a></li>
+      <li><a href="#screen-recording-policy" id="markdown-toc-screen-recording-policy">Screen recording policy</a></li>
+    </ul>
+  </li>
+  <li><a href="#vendor-configuration" id="markdown-toc-vendor-configuration">Vendor configuration</a></li>
+</ul>
+
+<h1 id="general-parameters">General parameters</h1>
+
+<h2 id="test-run-configuration-name">Test run configuration name</h2>
+
+<p>This string specifies the name of this test run configuration. It is used mainly in the generated test reports.</p>
+
+<ul class="tab" data-tab="337239c2-8e95-4c18-9370-14426d69f608">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="337239c2-8e95-4c18-9370-14426d69f608">
+    
+        <li class="active">
+<pre><code class="language-yaml">name: "My test run for sample app"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  name = "My test run for sample app"
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  name = "My test run for sample app"
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="output-directory">Output directory</h2>
+
+<p>Directory path to use as the root folder for all the runner output (logs, reports, etc).</p>
+
+<p>For gradle, the output path will automatically be set to a <code>marathon</code> folder in your reports folder unless it’s overridden.</p>
+
+<ul class="tab" data-tab="3d8b1380-99ba-43a1-8f54-d7d8a13b1ebe">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="3d8b1380-99ba-43a1-8f54-d7d8a13b1ebe">
+    
+        <li class="active">
+<pre><code class="language-yaml">outputDir: "build/reports/marathon"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  baseOutputDir = "some-path"
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  baseOutputDir = "some-path"
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h1 id="analytics-configuration">Analytics configuration</h1>
+
+<p>Configuration of analytics backend to be used for storing and retrieving test metrics. This plays a major part in optimising performance and
+mitigating flakiness.</p>
+
+<h2 id="disabled-analytics">Disabled analytics</h2>
+
+<p>By default no analytics backend is expected which means that each test will be treated as a completely new test.</p>
+
+<h2 id="influxdb"><a href="https://www.influxdata.com/">InfluxDB</a></h2>
+
+<p>Assuming you’ve done the setup for InfluxDB you need to provide:</p>
+
+<ul>
+  <li>url</li>
+  <li>username</li>
+  <li>password</li>
+  <li>database name</li>
+  <li>retention policy</li>
+</ul>
+
+<p>Database name is quite useful in case you have multiple configurations of tests/devices and you don’t want metrics from one configuration to
+affect the other one, e.g. regular and end-to-end tests.</p>
+
+<ul class="tab" data-tab="30c7464b-44cf-4f4d-83fa-8ac9c591a5e3">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="30c7464b-44cf-4f4d-83fa-8ac9c591a5e3">
+    
+        <li class="active">
+<pre><code class="language-yaml">analyticsConfiguration:
+  influx:
+    url: "http://influx.svc.cluster.local:8086"
+    user: "root"
+    password: "root"
+    dbName: "marathon"
+    retentionPolicyConfiguration:
+      name: "rpMarathonTest"
+      duration: "90d"
+      shardDuration: "1h"
+      replicationFactor: 5
+      isDefault: false
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  analytics {
+    influx {
+      url = "http://influx.svc.cluster.local:8086"
+      user = "root"
+      password = "root"
+      dbName = "marathon"
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  analytics {
+    influx {
+      url = "http://influx.svc.cluster.local:8086"
+      user = "root"
+      password = "root"
+      dbName = "marathon"
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="graphite"><a href="https://graphiteapp.org/">Graphite</a></h2>
+
+<p>Graphite can be used as an alternative to InfluxDB. It uses the following parameters:</p>
+
+<ul>
+  <li>host</li>
+  <li>port (optional) - the default is 2003</li>
+  <li>prefix (optional) - no metrics prefix will be used if not specified</li>
+</ul>
+
+<ul class="tab" data-tab="6816bdf7-e1c2-451d-b771-cf486876aae5">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="6816bdf7-e1c2-451d-b771-cf486876aae5">
+    
+        <li class="active">
+<pre><code class="language-yaml">analyticsConfiguration:
+  graphite:
+    host: "influx.svc.cluster.local"
+    port: "8080"
+    prefix: "prf"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  analytics {
+    graphite {
+      host = "influx.svc.cluster.local"
+      port = "8080"
+      prefix = "prf"
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  analytics {
+    graphite {
+      host = "influx.svc.cluster.local"
+      port = "8080"
+      prefix = "prf"
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h1 id="execution-flow">Execution flow</h1>
+
+<h2 id="pooling-strategy">Pooling strategy</h2>
+
+<p>Pooling strategy affects how devices are grouped together.</p>
+
+<h3 id="omni-aka-one-huge-pool">Omni a.k.a. one huge pool</h3>
+
+<p>All connected devices are merged into one group. <strong>This is the default mode</strong>.</p>
+
+<ul class="tab" data-tab="5d4eeee2-4eb1-499b-9f32-0b335dd392fc">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="5d4eeee2-4eb1-499b-9f32-0b335dd392fc">
+    
+        <li class="active">
+<pre><code class="language-yaml">poolingStrategy:
+  - type: "omni"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  //Omni is the default strategy
+  poolingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  //Omni is the default strategy
+  poolingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="by-abi">By abi</h3>
+
+<p>Devices are grouped by their ABI, e.g. <em>x86</em> and <em>mips</em>.</p>
+
+<ul class="tab" data-tab="8d0ca0ab-d4fc-4aaa-afc8-75abe30ac2ba">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="8d0ca0ab-d4fc-4aaa-afc8-75abe30ac2ba">
+    
+        <li class="active">
+<pre><code class="language-yaml">poolingStrategy:
+  - type: "abi"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    abi = true
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    abi = true
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="by-manufacturer">By manufacturer</h3>
+
+<p>Devices are grouped by manufacturer, e.g. <em>Samsung</em> and <em>Yota</em>.</p>
+
+<ul class="tab" data-tab="73297980-ac34-4331-8174-192184229c92">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="73297980-ac34-4331-8174-192184229c92">
+    
+        <li class="active">
+<pre><code class="language-yaml">poolingStrategy:
+  - type: "manufacturer"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    manufacturer = true
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    manufacturer = true
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="by-device-model">By device model</h3>
+
+<p>Devices are grouped by model name, e.g. <em>LG-D855</em> and <em>SM-N950F</em>.</p>
+
+<ul class="tab" data-tab="59e8feca-609d-49b4-96ff-2f93192b497d">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="59e8feca-609d-49b4-96ff-2f93192b497d">
+    
+        <li class="active">
+<pre><code class="language-yaml">poolingStrategy:
+  - type: "device-model"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    model = true
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    model = true
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="by-os-version">By OS version</h3>
+
+<p>Devices are grouped by OS version, e.g. <em>24</em> and <em>25</em>.</p>
+
+<ul class="tab" data-tab="767f260e-9796-4d4b-9f91-e5921672c27b">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="767f260e-9796-4d4b-9f91-e5921672c27b">
+    
+        <li class="active">
+<pre><code class="language-yaml">poolingStrategy:
+  - type: "os-version"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    operatingSystem = true
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  poolingStrategy {
+    operatingSystem = true
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="sharding-strategy">Sharding strategy</h2>
+
+<p>Sharding is a mechanism that allows the marathon to affect the tests scheduled for execution inside each pool.</p>
+
+<h3 id="parallel-sharding">Parallel sharding</h3>
+
+<p>Executes each test in parallel on all the available devices in pool. This is the default behaviour.</p>
+
+<ul class="tab" data-tab="2ae818f6-e248-47d4-b4f3-e03631311e33">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="2ae818f6-e248-47d4-b4f3-e03631311e33">
+    
+        <li class="active">
+<pre><code class="language-yaml">shardingStrategy:
+  type: "parallel"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  //Parallel is the default strategy
+  shardingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  //Parallel is the default strategy
+  shardingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="count-sharding">Count sharding</h3>
+
+<p>Executes each test <strong>count</strong> times inside each pool. For example you want to test the flakiness of a specific test hence you need to execute
+this test a lot of times. Instead of running the build X times just use this sharding strategy and the test will be executed X times.</p>
+
+<ul class="tab" data-tab="6d00df4a-3289-41bd-9fbc-45fa6565c429">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="6d00df4a-3289-41bd-9fbc-45fa6565c429">
+    
+        <li class="active">
+<pre><code class="language-yaml">shardingStrategy:
+  type: "count"
+  count: 5
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  shardingStrategy {
+    countSharding {
+      count = 5
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  shardingStrategy {
+    countSharding {
+      count = 5
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="sorting-strategy">Sorting strategy</h2>
+
+<p>In order to optimise the performance of test execution tests need to be sorted. This requires analytics backend enabled since we need
+historical data in order to anticipate tests behaviour like duration and success/failure rate.</p>
+
+<h3 id="no-sorting">No sorting</h3>
+
+<p>No sorting of tests is done at all. This is the default behaviour.</p>
+
+<ul class="tab" data-tab="47f4d26d-827a-46e0-ad44-a9f72358a719">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="47f4d26d-827a-46e0-ad44-a9f72358a719">
+    
+        <li class="active">
+<pre><code class="language-yaml">sortingStrategy:
+  type: "no-sorting"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  sortingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  sortingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="success-rate-sorting">Success rate sorting</h3>
+
+<p>For each test analytics storage is providing the success rate for a time window specified by time <strong>timeLimit</strong> parameter. All the tests are
+then sorted by the success rate in an increasing order, that is failing tests go first and successful tests go last. If you want to reverse
+the order set the <code>ascending</code> to <code>true</code>.</p>
+
+<ul class="tab" data-tab="99b95d63-f05b-4989-a1a0-427aadb7f630">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="99b95d63-f05b-4989-a1a0-427aadb7f630">
+    
+        <li class="active">
+<pre><code class="language-yaml">sortingStrategy:
+  type: "success-rate"
+  timeLimit: "2015-03-14T09:26:53.590Z"
+  ascending: false
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  sortingStrategy {
+    successRate {
+      limit = Instant.now().minus(Duration.parse("PT1H"))
+      ascending = false
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  sortingStrategy {
+    successRate {
+      limit = Instant.now().minus(Duration.parse("PT1H"))
+      ascending = false
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="execution-time-sorting">Execution time sorting</h3>
+
+<p>For each test analytics storage is providing the X percentile duration for a time window specified by time <strong>timeLimit</strong> parameter. Apart
+from absolute date/time it can be also be an ISO 8601 formatted duration.</p>
+
+<p>Percentile is configurable via the <strong>percentile</strong> parameter.</p>
+
+<p>All the tests are sorted so that long tests go first and short tests are executed last. This allows marathon to minimise the error of
+balancing the execution of tests at the end of execution.</p>
+
+<ul class="tab" data-tab="77bde831-3d35-4176-a416-d6453e5e53f3">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="77bde831-3d35-4176-a416-d6453e5e53f3">
+    
+        <li class="active">
+<pre><code class="language-yaml">sortingStrategy:
+  type: "execution-time"
+  percentile: 80.0
+  timeLimit: "-PT1H"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  sortingStrategy {
+    executionTime {
+      percentile = 80.0
+      timeLimit = Instant.now().minus(Duration.parse("PT1H"))
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  sortingStrategy {
+    executionTime {
+      percentile = 80.0
+      timeLimit = Instant.now().minus(Duration.parse("PT1H"))
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="batching-strategy">Batching strategy</h2>
+
+<p>Batching mechanism allows you to trade off stability for performance. A group of tests executed using one single run is called a batch. Most
+of the times this means that between tests in the same batch you’re sharing the device state so there is no clean-up. On the other hand you
+gain some performance improvements since the execution command usually is quite slow (up to 10 seconds for some platforms).</p>
+
+<h3 id="isolate-batching">Isolate batching</h3>
+
+<p>No batching is done at all, each test is executed using separate command execution, that is performance is sacrificed in favor of stability.
+This is the default mode.</p>
+
+<ul class="tab" data-tab="bbe10b6f-e777-4316-a975-8c2ba41195b5">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="bbe10b6f-e777-4316-a975-8c2ba41195b5">
+    
+        <li class="active">
+<pre><code class="language-yaml">batchingStrategy:
+  type: "isolate"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  batchingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  batchingStrategy {}
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="fixed-size-batching">Fixed size batching</h3>
+
+<p>Each batch is created based on the <strong>size</strong> parameter which is required. When a new batch of tests is needed the queue is dequeued for at
+most <strong>size</strong> tests.</p>
+
+<p>Optionally if you want to limit the batch duration you have to specify the <strong>timeLimit</strong> for the test metrics time window and the **
+durationMillis<strong>. For each test the analytics backend is accessed and **percentile</strong> of it’s duration is queried. If the sum of durations is
+more than the <strong>durationMillis</strong> then no more tests are added to the batch.</p>
+
+<p>This is useful if you have very very long tests and you use batching, e.g. you batch by size 10 and your test run duration is roughly 10
+minutes, but you have tests that are expected to run 2 minutes each. If you batch all of them together then at least one device will be
+finishing it’s execution in 20 minutes while all other devices might already finish. To mitigate this just specify the time limit for the
+batch using <strong>durationMillis</strong>.</p>
+
+<p>Another optional parameter for this strategy is the <strong>lastMileLength</strong>. At the end of execution batching tests actually hurts the
+performance so for the last tests it’s much better to execute them in parallel in separate batches. This works only if you execute on
+multiple devices. You can specify when this optimisation kicks in using the <strong>lastMileLength</strong> parameter, the last <strong>lastMileLength</strong> tests
+will use this optimisation.</p>
+
+<ul class="tab" data-tab="4c06d7d3-854d-40a6-8493-0a60b8b6770b">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="4c06d7d3-854d-40a6-8493-0a60b8b6770b">
+    
+        <li class="active">
+<pre><code class="language-yaml">batchingStrategy:
+  type: "fixed-size"
+  size: 5
+  durationMillis: 100000
+  percentile: 80.0
+  timeLimit: "-PT1H"
+  lastMileLength: 10
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  batchingStrategy {
+    fixedSize {
+      size = 5
+      durationMillis = 100000
+      percentile = 80.0
+      timeLimit = Instant.now().minus(Duration.parse("PT1H"))
+      lastMileLength = 10
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  batchingStrategy {
+    fixedSize {
+      size = 5
+      durationMillis = 100000
+      percentile = 80.0
+      timeLimit = Instant.now().minus(Duration.parse("PT1H"))
+      lastMileLength = 10
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="flakiness-strategy">Flakiness strategy</h2>
+
+<p>This is the main anticipation logic for marathon. Using the analytics backend we can understand the success rate and hence queue preventive
+retries to mitigate the flakiness of the tests and environment.</p>
+
+<h3 id="ignore-flakiness">Ignore flakiness</h3>
+
+<p>Nothing is done with this mode. This is the default behaviour.</p>
+
+<ul class="tab" data-tab="5d7a10bc-f70b-4be7-b93c-212ba4cc60ca">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="5d7a10bc-f70b-4be7-b93c-212ba4cc60ca">
+    
+        <li class="active">
+<pre><code class="language-yaml">flakinessStrategy:
+  type: "ignore"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  flakinessStrategy {}
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  flakinessStrategy {}
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="probability-based-flakiness-strategy">Probability based flakiness strategy</h3>
+
+<p>The main idea is that flakiness strategy anticipates the flakiness of the test based on the probability of test passing and tries to
+maximise the probability of passing when executed multiple times. For example the probability of test A passing is 0.5 and configuration has
+probability of 0.8 requested, then the flakiness strategy multiplies the test A to be executed 3 times (0.5 x 0.5 x 0.5 = 0.125 is the
+probability of all tests failing, so with probability 0.875 &gt; 0.8 at least one of tests will pass).</p>
+
+<p>The minimal probability that you want is specified using <strong>minSuccessRate</strong> during the time window controlled by the <strong>timeLimit</strong>.
+Additionally if you specify too high <strong>minSuccessRate</strong> you’ll have too many retries, so the upper bound for this is controlled by the
+<strong>maxCount</strong> parameter so that this strategy will calculate the required number of retries according to the <strong>minSuccessRate</strong> but if it’s
+higher than the <strong>maxCount</strong> it will choose <strong>maxCount</strong>.</p>
+
+<ul class="tab" data-tab="5846ae6e-7dce-4e7b-abb9-8b7181ab2275">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="5846ae6e-7dce-4e7b-abb9-8b7181ab2275">
+    
+        <li class="active">
+<pre><code class="language-yaml">flakinessStrategy:
+  type: "probability"
+  minSuccessRate: 0.7
+  maxCount: 3
+  timeLimit: "2015-03-14T09:26:53.590Z"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  flakinessStrategy {
+    probabilityBased {
+      minSuccessRate = 0.7
+      maxCount = 3
+      timeLimit = Instant.now().minus(Duration.parse("PT1H"))
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  flakinessStrategy {
+    probabilityBased {
+      minSuccessRate = 0.7
+      maxCount = 3
+      timeLimit = Instant.now().minus(Duration.parse("PT1H"))
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="retry-strategy">Retry strategy</h2>
+
+<p>This is the logic that kicks in if our preventive logic failed to anticipate such high number of retries. This works after the tests were
+actually executed.</p>
+
+<h3 id="no-retries">No retries</h3>
+
+<p>As the name implies, no retries are done. This is the default mode.</p>
+
+<ul class="tab" data-tab="aff9df6c-7cd7-4c5e-b5ec-cef5e466ed23">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="aff9df6c-7cd7-4c5e-b5ec-cef5e466ed23">
+    
+        <li class="active">
+<pre><code class="language-yaml">retryStrategy:
+  type: "no-retry"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  retryStrategy {}
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  retryStrategy {}
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="fixed-quota-retry-strategy">Fixed quota retry strategy</h3>
+
+<p>Parameter <strong>totalAllowedRetryQuota</strong> specifies how many retries at all (for all the tests is total) are allowed. <strong>retryPerTestQuota</strong>
+controls how many retries can be done for each test individually.</p>
+
+<ul class="tab" data-tab="fe343ee2-9de0-4547-bea7-4b82e5e7e7de">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="fe343ee2-9de0-4547-bea7-4b82e5e7e7de">
+    
+        <li class="active">
+<pre><code class="language-yaml">retryStrategy:
+  type: "fixed-quota"
+  totalAllowedRetryQuota: 100
+  retryPerTestQuota: 3
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  retryStrategy {
+    fixedQuota {
+      retryPerTestQuota = 3
+      totalAllowedRetryQuota = 100
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  retryStrategy {
+    fixedQuota {
+      retryPerTestQuota = 3
+      totalAllowedRetryQuota = 100
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h1 id="additional-parameters">Additional parameters</h1>
+
+<h2 id="test-filtering-configuration">Test filtering configuration</h2>
+
+<p>In order to indicate to marathon which tests you want to execute you can use the allowlist and blocklist parameters.</p>
+
+<p>First allowlist is applied, then the blocklist. Each accepts a <em>TestFilter</em>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>YAML type</th>
+      <th style="text-align: center">Gradle class</th>
+      <th style="text-align: right">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>“fully-qualified-test-name”</td>
+      <td style="text-align: center"><code>FullyQualifiedTestnameFilter</code></td>
+      <td style="text-align: right">Filters tests by their FQTN which is <code>$package.$class#$method</code>. The <code>#</code> sign is important!</td>
+    </tr>
+    <tr>
+      <td>“fully-qualified-class-name”</td>
+      <td style="text-align: center"><code>FullyQualifiedClassnameFilter</code></td>
+      <td style="text-align: right">Filters tests by their FQCN which is <code>$package.$class</code></td>
+    </tr>
+    <tr>
+      <td>“simple-class-name”</td>
+      <td style="text-align: center"><code>SimpleClassnameFilter</code></td>
+      <td style="text-align: right">Filters tests by using only test class name, e.g. <code>MyTest</code></td>
+    </tr>
+    <tr>
+      <td>“package”</td>
+      <td style="text-align: center"><code>TestPackageFilter</code></td>
+      <td style="text-align: right">Filters tests by using only test package, e.g. <code>com.example</code></td>
+    </tr>
+    <tr>
+      <td>“method”</td>
+      <td style="text-align: center"><code>TestMethodFilter</code></td>
+      <td style="text-align: right">Filters tests by using only test method, e.g. <code>myComplicatedTest</code></td>
+    </tr>
+    <tr>
+      <td>“annotation”</td>
+      <td style="text-align: center"><code>AnnotationFilter</code></td>
+      <td style="text-align: right">Filters tests by using only test annotation name, e.g. <code>androidx.test.filters.LargeTest</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All the filters can be used in allowlist and in blocklist block as well, for example the following will run only smoke tests:</p>
+
+<pre><code class="language-yaml">allowlist:
+  - type: "annotation"
+    values:
+      - "com.example.SmokeTest"
+</code></pre>
+
+<p>And the next snippet will execute everything, but the smoke tests:</p>
+
+<pre><code class="language-yaml">blocklist:
+  - type: "annotation"
+    values:
+      - "com.example.SmokeTest"
+</code></pre>
+
+<h3 id="filter-parameters">Filter parameters</h3>
+
+<p>Each of the above filters expects <strong>only one</strong> of the following parameters:</p>
+
+<ul>
+  <li>A <code>regex</code> for matching</li>
+  <li>An array of <code>values</code></li>
+  <li>A <code>file</code> that contains each value on a separate line (empty lines will be ignored)</li>
+</ul>
+
+<h3 id="regex-filtering">Regex filtering</h3>
+
+<p>An example of <code>regex</code> filtering is executing any test for a particular package, e.g. for package: <code>com.example</code> and it’s subpackages:</p>
+
+<pre><code class="language-yaml">allowlist:
+  - type: "package"
+    regex: "com\.example.*"
+</code></pre>
+
+<h3 id="values-filtering">Values filtering</h3>
+
+<p>You could also specify each package separately via values:</p>
+
+<pre><code class="language-yaml">allowlist:
+  - type: "package"
+    values:
+      - "com.example"
+      - "com.example.subpackage"
+</code></pre>
+
+<h3 id="values-file-filtering">Values file filtering</h3>
+
+<p>Or you can supply these packages via a file (be careful with the relative paths: they will be relative to the workdir of the process):</p>
+
+<pre><code class="language-yaml">allowlist:
+  - type: "package"
+    file: "testing/myfilterfile"
+</code></pre>
+
+<p>Inside the <code>testing/myfilterfile</code> you should supply the values, each on a separate line:</p>
+
+<pre><code>com.example
+com.example.subpackage
+</code></pre>
+
+<h3 id="running-only-specific-tests">Running only specific tests</h3>
+
+<p>A common scenario is to execute a list of tests. You can do this via the FQTN filter:</p>
+
+<ul class="tab" data-tab="aa5b0455-e0a9-4681-b97d-9da0bbae6a56">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="aa5b0455-e0a9-4681-b97d-9da0bbae6a56">
+    
+        <li class="active">
+<pre><code class="language-yaml">allowlist:
+  - type: "fully-qualified-test-name"
+    values:
+      - "com.example.ElaborateTest#testMethod"
+      - "com.example.subpackage.OtherTest#testSomethingElse"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  filteringConfiguration {
+    allowlist = mutableListOf(
+      FullyQualifiedTestnameFilter(
+        values = listOf(
+          "com.example.ElaborateTest#testMethod",
+          "com.example.subpackage.OtherTest#testSomethingElse",
+        )
+      )
+    )
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h3 id="more-examples">More examples</h3>
+
+<p>If you want to execute tests <code>ScaryTest</code> and <code>FlakyTest</code> for any package using the <em>class name</em> filter:</p>
+
+<pre><code class="language-yaml">- type: "simple-class-name"
+  values:
+    - "ScaryTest"
+    - "FlakyTest" 
+</code></pre>
+
+<p>In case you want to separate the filtering configuration from the <em>Marathonfile</em> you can supply a reference to an external file:</p>
+
+<pre><code class="language-yaml">- type: "simple-class-name"
+  file: testing/myfilterfile
+</code></pre>
+
+<p>Inside the <code>testing/myfilterfile</code> you should supply the same values, each on a separate line, e.g. <em>fully qualified class name</em> filter:</p>
+
+<pre><code>com.example.ScaryTest
+com.example.subpackage.FlakyTest
+</code></pre>
+
+<h3 id="composition-filtering">Composition filtering</h3>
+
+<p>In order to filter using multiple filters at the same time a <em>composition</em> filter is also available which accepts a list of base filters and
+also an operation such as <strong>UNION</strong>, <strong>INTERSECTION</strong> or <strong>SUBTRACT</strong>. You can create complex filters such as get all the tests starting
+with <em>E2E</em> but get only methods from there ending with <em>Test</em>. Composition filter is not supported by groovy gradle scripts, but is
+supported if you use gradle kts.</p>
+
+<p>An important thing to mention is that by default platform specific ignore options are not taken into account. This is because a
+cross-platform test runner cannot account for all the possible test frameworks out there. However, each framework’s ignore option can still
+be “explained” to marathon, e.g. JUnit’s <strong>org.junit.Ignore</strong> annotation can be specified in the filtering configuration.</p>
+
+<ul class="tab" data-tab="10b5b8ca-9172-4a57-99de-36bddfed7095">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="10b5b8ca-9172-4a57-99de-36bddfed7095">
+    
+        <li class="active">
+<pre><code class="language-yaml">filteringConfiguration:
+  allowlist:
+    - type: "simple-class-name"
+      regex: ".*"
+    - type: "fully-qualified-class-name"
+      values:
+        - "com.example.MyTest"
+        - "com.example.MyOtherTest"
+    - type: "fully-qualified-class-name"
+      file: "testing/mytestfilter"
+    - type: "method"
+      regex: "."
+    - type: "composition"
+      filters:
+        - type: "package"
+          regex: ".*"
+        - type: "method"
+          regex: ".*"
+      op: "UNION"
+  blocklist:
+    - type: "package"
+      regex: ".*"
+    - type: "annotation"
+      regex: ".*"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">//Simple access Groovy configuration doesn't allow specifying anything besides the test filter regex
+marathon {
+  filteringConfiguration {
+    allowlist {
+      simpleClassNameFilter = [".*"]
+      fullyQualifiedClassnameFilter = [".*"]
+      testMethodFilter = [".*"]
+    }
+    blocklist {
+      testPackageFilter = [".*"]
+      annotationFilter = [".*"]
+    }
+  }
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  filteringConfiguration {
+    allowlist = mutableListOf(
+      SimpleClassnameFilter(".*".toRegex()),
+      FullyQualifiedClassnameFilter(".*".toRegex()),
+      TestMethodFilter(".*".toRegex()),
+      CompositionFilter(
+        listOf(
+          TestPackageFilter(".*".toRegex()),
+          TestMethodFilter(".*".toRegex())
+        ),
+        CompositionFilter.OPERATION.UNION
+      )
+    )
+    blocklist = mutableListOf(
+      TestPackageFilter(".*".toRegex()),
+      AnnotationFilter(".*".toRegex())
+    )
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="fragmented-execution-of-tests">Fragmented execution of tests</h2>
+<p>This is a test filter similar to sharded test execution that <a href="https://source.android.com/devices/tech/test_infra/tradefed/architecture/advanced/sharding">AOSP provides</a>.</p>
+
+<p>It is intended to be used in situations where it is not possible to connect multiple execution devices to a single test run, e.g. CI setup
+that can schedule parallel jobs each containing a single execution device. There are two parameters for using fragmentation:</p>
+
+<ul>
+  <li><strong>count</strong> - the number of overall fragments (e.g. 10 parallel execution)</li>
+  <li><strong>index</strong> - current execution index (in our case of 10 executions valid indexes are 0..9)</li>
+</ul>
+
+<p>This is a dynamic programming technique, hence the results will be sub-optimal compared to connecting multiple devices to the same test
+run</p>
+
+<ul class="tab" data-tab="821e93f6-afd9-4ff8-975c-178cc6cab1b3">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="821e93f6-afd9-4ff8-975c-178cc6cab1b3">
+    
+        <li class="active">
+<pre><code class="language-yaml">filteringConfiguration:
+  allowlist:
+    - type: "fragmentation"
+      index: 0
+      count: 10
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  filteringConfiguration {
+    allowlist = mutableListOf(
+      FragmentationFilter(index = 0, count = 10)
+    )
+  }
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<p>If you want to dynamically pass the index of the test run you can use yaml envvar interpolation, e.g.:</p>
+<pre><code class="language-yaml">filteringConfiguration:
+  allowlist:
+    - type: "fragmentation"
+      index: ${MARATHON_FRAGMENT_INDEX}
+      count: 10
+</code></pre>
+
+<p>and then execute the testing as following:</p>
+
+<pre><code class="language-bash">$ MARATHON_FRAGMENT_INDEX=0 marathon
+</code></pre>
+
+<p>To pass the fragment index in gradle refer to the <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html#properties">Gradle’s dynamic project properties</a></p>
+
+<h2 id="test-class-regular-expression">Test class regular expression</h2>
+
+<p>By default, test classes are found using the <code>"^((?!Abstract).)*Test[s]*$"</code> regex. You can override this if you need to.</p>
+
+<ul class="tab" data-tab="bacfe354-090d-4c03-ba2d-ee69c18d702c">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="bacfe354-090d-4c03-ba2d-ee69c18d702c">
+    
+        <li class="active">
+<pre><code class="language-yaml">testClassRegexes:
+  - "^((?!Abstract).)*Test[s]*$"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  testClassRegexes = [
+    "^((?!Abstract).)*Test[s]*\$"
+  ]
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  testClassRegexes = listOf(
+    "^((?!Abstract).)*Test[s]*$"
+  )
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="ignore-failures">Ignore failures</h2>
+
+<p>By default, the build fails if some tests failed. If you want to the build to succeed even if some tests failed use <em>true</em>.</p>
+
+<ul class="tab" data-tab="0caaa105-d127-4f1a-9881-91d3ec2a2475">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="0caaa105-d127-4f1a-9881-91d3ec2a2475">
+    
+        <li class="active">
+<pre><code class="language-yaml">ignoreFailures: true
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  ignoreFailures = true
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  ignoreFailures = true
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="code-coverage">Code coverage</h2>
+
+<p>Depending on the vendor implementation code coverage may not be supported. By default, code coverage is disabled. If this option is enabled,
+code coverage will be collected and marathon assumes that code coverage generation will be setup by user (e.g. proper build flags, jacoco
+jar added to classpath, etc).</p>
+
+<ul class="tab" data-tab="9fd7ea66-3fa5-4f1e-a333-0e15b1f207ea">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="9fd7ea66-3fa5-4f1e-a333-0e15b1f207ea">
+    
+        <li class="active">
+<pre><code class="language-yaml">isCodeCoverageEnabled: true
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  isCodeCoverageEnabled = true
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  isCodeCoverageEnabled = true
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="test-output-timeout">Test output timeout</h2>
+
+<p>This parameter specifies the behaviour for the underlying test executor to timeout if there is no output. By default, this is set to 5
+minutes.</p>
+
+<ul class="tab" data-tab="4855a27d-76da-43e7-af54-d8c9deaffcfa">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="4855a27d-76da-43e7-af54-d8c9deaffcfa">
+    
+        <li class="active">
+<pre><code class="language-yaml">testOutputTimeoutMillis: 30000
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  testOutputTimeoutMillis = 30000
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  testOutputTimeoutMillis = 30000
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="test-batch-timeout">Test batch timeout</h2>
+
+<p>This parameter specifies the behaviour for the underlying test executor to timeout if the batch execution exceeded some duration. By
+default, this is set to 30 minutes.</p>
+
+<ul class="tab" data-tab="abb04f06-7b69-4f0e-8e10-79148b818af9">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="abb04f06-7b69-4f0e-8e10-79148b818af9">
+    
+        <li class="active">
+<pre><code class="language-yaml">testBatchTimeoutMillis: 900000
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  testBatchTimeoutMillis = 900000
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  testBatchTimeoutMillis = 900000
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="device-provider-init-timeout">Device provider init timeout</h2>
+
+<p>When the test run starts device provider is expected to provide some devices. This should not take more than 3 minutes by default. If your
+setup requires this to be changed please override as following:</p>
+
+<ul class="tab" data-tab="57240141-7617-4399-acd3-a86b2241f411">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="57240141-7617-4399-acd3-a86b2241f411">
+    
+        <li class="active">
+<pre><code class="language-yaml">deviceInitializationTimeoutMillis: 300000
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  deviceInitializationTimeoutMillis = 300000
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  deviceInitializationTimeoutMillis = 300000
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="analytics-tracking">Analytics tracking</h2>
+
+<p>To better understand the use-cases that marathon is used for we’re asking you to provide us with anonymised information about your usage. By
+default, this is disabled. Use <strong>true</strong> to enable.</p>
+
+<ul class="tab" data-tab="6d3f725d-6b15-40a9-8d1e-51059411f719">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="6d3f725d-6b15-40a9-8d1e-51059411f719">
+    
+        <li class="active">
+<pre><code class="language-yaml">analyticsTracking: true
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  analyticsTracking = true
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  analyticsTracking = true
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="uncompleted-test-retry-quota">Uncompleted test retry quota</h2>
+
+<p>By default, tests that don’t have any status reported after execution (for example a device disconnected during the execution) retry
+indefinitely. You can limit the number of total execution for such cases using this option.</p>
+
+<ul class="tab" data-tab="6ea05d7d-dc37-407e-be29-fde21eee51e3">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="6ea05d7d-dc37-407e-be29-fde21eee51e3">
+    
+        <li class="active">
+<pre><code class="language-yaml">uncompletedTestRetryQuota: 100
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  uncompletedTestRetryQuota = 100
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  uncompletedTestRetryQuota = 100
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="strict-mode">Strict mode</h2>
+
+<p>By default, if one of the test retries succeeds then the test is considered successfully executed. If you require success status only when
+all retries were executed successfully you can enable the strict mode. This may be useful to verify that flakiness of tests was fixed for
+example.</p>
+
+<ul class="tab" data-tab="ce33950c-3fea-4edb-a14f-ff8e11bce53f">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="ce33950c-3fea-4edb-a14f-ff8e11bce53f">
+    
+        <li class="active">
+<pre><code class="language-yaml">strictMode: true
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  strictMode = true
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  strictMode = true
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="debug-mode">Debug mode</h2>
+
+<p>Enabled very verbose logging to stdout of all the marathon components. Very useful for debugging.</p>
+
+<ul class="tab" data-tab="02cca995-8232-469d-964f-e7bce1a03840">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="02cca995-8232-469d-964f-e7bce1a03840">
+    
+        <li class="active">
+<pre><code class="language-yaml">debug: true
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  debug = true
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  debug = true
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h2 id="screen-recording-policy">Screen recording policy</h2>
+
+<p>By default, screen recording will only be pulled for tests that failed (<strong>ON_FAILURE</strong> option). This is to save space and also to reduce the
+test duration time since we’re not pulling additional files. If you need to save screen recording regardless of the test pass/failure please
+use the <strong>ON_ANY</strong> option:</p>
+
+<ul class="tab" data-tab="6bc239d6-1f80-49fd-a4f9-8fdb4e5555b3">
+    
+        <li class="active">
+            <a href="">Marathonfile </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle </a>
+        </li>
+    
+        <li>
+            <a href="">Gradle Kotlin </a>
+        </li>
+    
+</ul>
+<ul class="tab-content" id="6bc239d6-1f80-49fd-a4f9-8fdb4e5555b3">
+    
+        <li class="active">
+<pre><code class="language-yaml">screenRecordingPolicy: "ON_ANY"
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  screenRecordingPolicy = com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy.ON_ANY
+}
+</code></pre>
+
+</li>
+    
+        <li>
+<pre><code class="language-kotlin">marathon {
+  screenRecordingPolicy = com.malinskiy.marathon.execution.policy.ScreenRecordingPolicy.ON_ANY
+}
+</code></pre>
+
+</li>
+    
+</ul>
+
+<h1 id="vendor-configuration">Vendor configuration</h1>
+
+<p>See relevant vendor module page, e.g. <a href="/marathon/ven/android.html">Android</a> or <a href="/marathon/ven/ios.html">iOS</a></p>
+
+
+    </div>
+</div>
+
+</div>
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/highlight.min.js"></script>
+<script> hljs.initHighlighting(); </script>
+<!-- Docsearch -->
+<script src="/marathon/js/docsearch.min.js" type="text/javascript"></script>
+<!-- Touch gesture support -->
+<script src="/marathon/js/hammer.min.js"></script>
+<!-- Custom scripts for this template -->
+<script src="/marathon/js/functions.js"></script>
+<script src="/marathon/js/tabs.js"></script>
+
+</body>
+</html>

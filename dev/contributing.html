@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Marathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cross-platform test runner written for Android and iOS projects">
+    <meta name="keywords" content="android, testing, testing-tool, test-runner, espresso, uitest, uitesting, uitests, ios, marathon, xcrun, instrumentation, instrumentation-tests, gradle, parallel, performance">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+          type="text/css">
+    <!-- Animated -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="shortcut icon" href="/marathon/img/favicon.png">
+    <!-- highlight  css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/styles/solarized-dark.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" type="text/css" href="/marathon/css/marathon.css">
+    <!-- tabs -->
+    <link rel="stylesheet" type="text/css" href="/marathon/css/tabs.css">
+
+    <!-- Diagrams support -->
+    <script src="/marathon/js/dagre.min.js"></script>
+    <script src="/marathon/js/lodash.min.js"></script>
+    <script src="/marathon/js/nomnoml.js"></script>
+    <script src="/marathon/js/diagrams.js"></script>
+
+    
+    <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-131132823-2', 'auto');
+    ga('send', 'pageview');
+
+
+</script>
+
+    
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div>
+      <a class="brand" href="/marathon/">
+            <img src="/marathon/img/marathon-brand-sidebar.svg" alt="">
+      </a>
+      <a href="javascript:void(0)" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <ul class="sidebar-nav">
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>General</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="1">
+              <a href="/marathon/doc/getting-started.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Getting Started</span>
+              </a>
+            </li>
+            
+            <li data-order="2">
+              <a href="/marathon/doc/downloading.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Downloading</span>
+              </a>
+            </li>
+            
+            <li data-order="3">
+              <a href="/marathon/doc/configuration.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Options</span>
+              </a>
+            </li>
+            
+            <li data-order="5">
+              <a href="/marathon/doc/executing.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Executing</span>
+              </a>
+            </li>
+            
+            <li data-order="6">
+              <a href="/marathon/doc/reports.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Reporting</span>
+              </a>
+            </li>
+            
+            <li data-order="7">
+              <a href="/marathon/doc/faq.html">
+                  <i class="fa fa-circle"></i>
+                  <span>FAQ</span>
+              </a>
+            </li>
+            
+            <li data-order="8">
+              <a href="/marathon/doc/special-thanks.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Special thanks</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Reference</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="">
+              <a href="/marathon/ref/samples.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Samples</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Vendor extensions</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="1">
+              <a href="/marathon/ven/android.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Android</span>
+              </a>
+            </li>
+            
+            <li data-order="2">
+              <a href="/marathon/ven/ios.html">
+                  <i class="fa fa-circle"></i>
+                  <span>iOS</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+        
+        
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <span>Developers</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul>
+            
+            
+            <li data-order="2">
+              <a href="/marathon/dev/contributing.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Contributing</span>
+              </a>
+            </li>
+            
+            <li data-order="3">
+              <a href="/marathon/dev/vision.html">
+                  <i class="fa fa-circle"></i>
+                  <span>Vision</span>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+    
+    </ul>
+
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <a href="javascript:void(0)" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="search-wrapper">
+            <input class="search" id="docsearch" placeholder="Search documentation..." type="search">
+        </div>
+    </div>
+    <div class="doc-content">
+        
+        <p>Contributions to Marathon’s source are welcome! Here is a quick guide where to start.</p>
+
+<h1 id="setup">Setup</h1>
+
+<ul>
+  <li>Install <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Oracle JDK</a></li>
+  <li>Install your IDE of choice that supports Kotlin and Gradle, e.g. <a href="https://www.jetbrains.com/idea/download/">IntelliJ IDEA CE</a></li>
+  <li>Install a git client to checkout the repository, e.g. <a href="https://desktop.github.com/">GitHub Desktop</a></li>
+</ul>
+
+<p>Then checkout the marathon repository and open the project in your IDE.</p>
+
+<h2 id="contribution-workflow">Contribution workflow</h2>
+
+<p>All the issues are tracked in GitHub, so check the <a href="https://github.com/MarathonLabs/marathon/issues">issue tracker</a> and <a href="https://github.com/MarathonLabs/marathon/projects/1">project board</a> for a list of something to work on.
+Alternatively you can submit an issue and then work on it. Before you do that you’re highly encouraged to check if this issue is not already
+closed and talk with us using our <a href="https://bit.ly/2LLghaW">slack channel</a>.</p>
+
+<p>Once you pick your issue please assign yourself to work on it.</p>
+
+<p>All the issues relevant to a specific version are assigned to a GitHub milestone so if the issue you’re working on is required to fixed for
+the next version we’ll add it to the current milestone.</p>
+
+<h2 id="getting-the-source-code">Getting the source code</h2>
+
+<p>You can get the source code of marathon by cloning the repo.</p>
+
+<pre><code class="language-bash">git clone https://github.com/MarathonLabs/marathon.git
+</code></pre>
+
+<p>If you plan to submit changes to the repo then please fork the project in GitHub. If you commit frequently then we can add you to the main
+repository also.</p>
+
+<h2 id="included-run-configurations-for-intellij-idea">Included run configurations for IntelliJ IDEA</h2>
+
+<p>Marathon’s project has built-in run configurations for executing included sample projects:</p>
+
+<p><img src="/marathon/img/idea-run-configurations.png" alt="html report home page" title="IntelliJ Run Configurations" /></p>
+
+<p>You can use this setup to quickly debug something on a sample app or you can change the workdir of the configuration and debug your own
+codebase. Default configurations for IntelliJ use CLI version of marathon.</p>
+
+<h2 id="building-the-project">Building the project</h2>
+
+<h3 id="cli">CLI</h3>
+
+<p>While working on an issue it’s much faster to use CLI distribution which you can build using the <code>:cli:installDist</code> task in gradle.
+This task builds marathon binary with all of its dependencies. The output binary can be found at <code>cli/build/install/marathon/bin/marathon</code>.
+If you use this output frequently consider changing your path <code>export PATH=$PATH:$MARATHON_CHECKOUT_DIR/cli/build/install/marathon/bin/marathon</code>.</p>
+
+<p>If you want to create a distributable zip:</p>
+<pre><code class="language-bash">$ ./gradlew :cli:distZip
+$ ls cli/build/distributions
+marathon-X.X.X-SNAPSHOT.zip
+</code></pre>
+
+<h3 id="marathon-gradle-plugin">marathon-gradle-plugin</h3>
+
+<p>In order to test gradle plugin changes we install all modules into a maven structured folder. Unfortunately you can’t use gradle plugins
+with <em>SNAPSHOT</em> version, so in order to test your changes via gradle plugin you have to publish a release version of marathon which gets
+quite cumbersome, that’s why preferred method of testing for development purposes is the CLI.</p>
+
+<p>In order to install all packages into <em>build/repository</em> folder you need to
+execute <code>./gradlew publishDefaultPublicationToLocalRepository -PreleaseMode=RELEASE</code></p>
+
+<p>After that you need to sync your project. By default, all sample projects depend on this local folder and pick up marathon from there. If
+it’s not working check that you actually built everything related to the plugin and the version that you specified in sample project and the
+one that’s published match.</p>
+
+<h2 id="testing-changes">Testing changes</h2>
+
+<p>Before trying to execute real tests try executing unit and integration tests via <code>./gradlew clean test jacocoTestReport integrationTest</code>
+command. Assuming everything passes check relevant sample project where you can test your changes. If your change is related to the core
+part then you must check that both android and ios vendor implementations will not be affected.</p>
+
+<h2 id="code-style">Code Style</h2>
+
+<p>Before pushing your changes please check if our linter (<em>detekt</em>) passes via <code>./gradlew clean detektCheck</code> command.</p>
+
+<h1 id="general-overview-of-modules">General overview of modules</h1>
+
+<p><strong>core</strong> - This is the main logic part of the runner.</p>
+
+<p><strong>marathon-gradle-plugin</strong> - This is a gradle plugin implementation for Android testing</p>
+
+<p><strong>vendor</strong> - This is custom vendor implementation related to specific platform. One specific implementation that is important is
+vendor-test, this is a fake implementation that we’re using for integration testing</p>
+
+<p><strong>report</strong> - This is a group of modules which implement various reports that marathon generates after the build</p>
+
+<p><strong>cli</strong> - This is the command-line interface wrapper for Marathon</p>
+
+<p><strong>analytics:usage</strong> - This is an analytics implementation that we’re using for tracking anonymised usage of marathon.</p>
+
+<h1 id="development-chat">Development chat</h1>
+
+<p>We’re available for any questions or proposals on <a href="https://bit.ly/2LLghaW">Slack</a>. Feel free to join!</p>
+
+
+    </div>
+</div>
+
+</div>
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/highlight.min.js"></script>
+<script> hljs.initHighlighting(); </script>
+<!-- Docsearch -->
+<script src="/marathon/js/docsearch.min.js" type="text/javascript"></script>
+<!-- Touch gesture support -->
+<script src="/marathon/js/hammer.min.js"></script>
+<!-- Custom scripts for this template -->
+<script src="/marathon/js/functions.js"></script>
+<script src="/marathon/js/tabs.js"></script>
+
+</body>
+</html>
