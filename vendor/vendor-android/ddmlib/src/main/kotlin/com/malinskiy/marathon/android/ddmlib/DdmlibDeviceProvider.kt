@@ -66,7 +66,20 @@ class DdmlibDeviceProvider(
             .enableUserManagedAdbMode(5037)
             .setClientSupportEnabled(false)
             .build()
-        AndroidDebugBridge.init(adbInitOptions)
+
+        val sInitializedField = AndroidDebugBridge::class.java.getDeclaredField("sInitialized")
+        sInitializedField.isAccessible = true
+        val sInitialized = sInitializedField.get(AndroidDebugBridge.getBridge()) as Boolean
+
+        if(sInitialized) {
+            AndroidDebugBridge.terminate()
+            logger.debug {
+                "AndroidDebugBridge was terminate for reinitialization"
+            }
+            AndroidDebugBridge.init(adbInitOptions)
+        } else {
+            AndroidDebugBridge.init(adbInitOptions)
+        }
 
         val absolutePath = Paths.get(vendorConfiguration.androidSdk.absolutePath, "platform-tools", "adb").toFile().absolutePath
 
