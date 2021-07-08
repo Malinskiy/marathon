@@ -46,4 +46,8 @@ class CompositeTestRunListener(private val listeners: List<AndroidTestRunListene
     override suspend fun testRunEnded(elapsedTime: Long, runMetrics: Map<String, String>) {
         execute { it.testRunEnded(elapsedTime, runMetrics) }
     }
+
+    override suspend fun afterTestRun() {
+        execute { it.afterTestRun() }
+    }
 }

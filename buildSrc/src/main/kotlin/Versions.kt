@@ -5,7 +5,7 @@ object Versions {
     val coroutines = "1.4.3"
 
     val ddmlib = "27.1.2"
-    val adam = "0.3.1"
+    val adam = "0.3.2"
     val dexTestParser = "2.3.3"
     val kotlinLogging = "2.0.8"
     val logbackClassic = "1.2.3"

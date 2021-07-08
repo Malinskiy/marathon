@@ -76,7 +76,7 @@ class AndroidDeviceTestRunner(private val device: DdmlibAndroidDevice, private v
                 logger.error(e) { errorMessage }
                 listener.testRunFailed(errorMessage)
             } finally {
-
+                listener.afterTestRun()
             }
         }
     }
