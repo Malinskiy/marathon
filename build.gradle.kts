@@ -68,4 +68,16 @@ allprojects {
             }
         }
     }
+
+    configurations.all {
+        resolutionStrategy {
+            eachDependency {
+                if (requested.group == "org.jetbrains.kotlin"
+                    && (requested.name.startsWith("kotlin-stdlib") || requested.name.startsWith("kotlin-reflect"))
+                ) {
+                    useVersion(Versions.kotlin)
+                }
+            }
+        }
+    }
 }

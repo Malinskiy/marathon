@@ -16,16 +16,20 @@ import com.malinskiy.marathon.execution.TestResult
 import com.malinskiy.marathon.execution.TestStatus
 import com.malinskiy.marathon.log.MarathonLogConfigurator
 import com.malinskiy.marathon.report.junit.JUnitReporter
-import com.malinskiy.marathon.report.junit.JUnitWriter
 import com.malinskiy.marathon.test.assert.shouldBeEqualToAsXML
 import com.malinskiy.marathon.vendor.VendorConfiguration
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
+import org.xmlunit.builder.Input
+import org.xmlunit.matchers.ValidationMatcher
 import java.io.File
-import java.nio.file.Files
 import java.time.Instant
 import com.malinskiy.marathon.test.Test as MarathonTest
 
 class JUnitReporterTest {
+    @TempDir
+    lateinit var temporaryFolder: File
 
     @Test
     fun `only Passed Tests and without retries should generate correct report`() {
@@ -43,12 +47,13 @@ class JUnitReporterTest {
             )
         )
         val configuration = getConfiguration()
-        println(configuration.outputDir)
-        val jUnitWriter = JUnitWriter(configuration.outputDir)
-        val junitReport = JUnitReporter(jUnitWriter)
+        val junitReport = JUnitReporter(configuration.outputDir)
         junitReport.generate(report)
-        File(configuration.outputDir.absolutePath + "/tests/myPool/xxyyzz/marathon_junit_report.xml")
+        File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml")
             .shouldBeEqualToAsXML(File(javaClass.getResource("/output/tests/myPool/xxyyzz/marathon_junit_report_passed_tests.xml").file))
+
+        val actual = File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml").readText()
+        assertThat(actual, isValidJunitXml)
     }
 
     @Test
@@ -63,16 +68,19 @@ class JUnitReporterTest {
             testEvents = listOf(
                 createTestEvent(device, "test1", TestStatus.FAILURE),
                 createTestEvent(device, "test2", TestStatus.INCOMPLETE),
+                createTestEvent(device, "test2", TestStatus.FAILURE),
                 createTestEvent(device, "test3", TestStatus.FAILURE)
             )
         )
         val configuration = getConfiguration()
         println(configuration.outputDir)
-        val jUnitWriter = JUnitWriter(configuration.outputDir)
-        val junitReport = JUnitReporter(jUnitWriter)
+        val junitReport = JUnitReporter(configuration.outputDir)
         junitReport.generate(report)
-        File(configuration.outputDir.absolutePath + "/tests/myPool/xxyyzz/marathon_junit_report.xml")
+        File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml")
             .shouldBeEqualToAsXML(File(javaClass.getResource("/output/tests/myPool/xxyyzz/marathon_junit_report_failed_tests.xml").file))
+
+        val actual = File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml").readText()
+        assertThat(actual, isValidJunitXml)
     }
 
     @Test
@@ -97,11 +105,14 @@ class JUnitReporterTest {
         )
         val configuration = getConfiguration()
         println(configuration.outputDir)
-        val jUnitWriter = JUnitWriter(configuration.outputDir)
-        val junitReport = JUnitReporter(jUnitWriter)
+        val junitReport = JUnitReporter(configuration.outputDir)
         junitReport.generate(report)
-        File(configuration.outputDir.absolutePath + "/tests/myPool/xxyyzz/marathon_junit_report.xml")
+        File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml")
             .shouldBeEqualToAsXML(File(javaClass.getResource("/output/tests/myPool/xxyyzz/marathon_junit_report_failed_tests_with_stacktrace.xml").file))
+
+        val actual = File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml").readText()
+        assertThat(actual, isValidJunitXml)
+
     }
 
     @Test
@@ -124,11 +135,14 @@ class JUnitReporterTest {
         )
         val configuration = getConfiguration()
         println(configuration.outputDir)
-        val jUnitWriter = JUnitWriter(configuration.outputDir)
-        val junitReport = JUnitReporter(jUnitWriter)
+        val junitReport = JUnitReporter(configuration.outputDir)
         junitReport.generate(report)
-        File(configuration.outputDir.absolutePath + "/tests/myPool/xxyyzz/marathon_junit_report.xml")
+        File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml")
             .shouldBeEqualToAsXML(File(javaClass.getResource("/output/tests/myPool/xxyyzz/marathon_junit_report_failed_to_passed_test.xml").file))
+
+        val actual = File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml").readText()
+        assertThat(actual, isValidJunitXml)
+
     }
 
     @Test
@@ -151,11 +165,56 @@ class JUnitReporterTest {
         )
         val configuration = getConfiguration()
         println(configuration.outputDir)
-        val jUnitWriter = JUnitWriter(configuration.outputDir)
-        val junitReport = JUnitReporter(jUnitWriter)
+        val junitReport = JUnitReporter(configuration.outputDir)
         junitReport.generate(report)
-        File(configuration.outputDir.absolutePath + "/tests/myPool/xxyyzz/marathon_junit_report.xml")
+        File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml")
             .shouldBeEqualToAsXML(File(javaClass.getResource("/output/tests/myPool/xxyyzz/marathon_junit_report_passed_to_failed_test.xml").file))
+
+        val actual = File(configuration.outputDir.absolutePath + "/tests/myPool/marathon_junit_report.xml").readText()
+        assertThat(actual, isValidJunitXml)
+    }
+
+    @Test
+    fun `sample android junit xml is valid`() {
+        val actual = File(javaClass.getResource("/output/tests/myPool/xxyyzz/marathon_junit_report_android_sample.xml").file).readText()
+        assertThat(actual, isValidJunitXml)
+    }
+
+    fun getConfiguration() =
+        Configuration(
+            name = "",
+            outputDir = File(temporaryFolder, "test-run").apply { deleteRecursively(); mkdirs() },
+            analyticsConfiguration = AnalyticsConfiguration.DisabledAnalytics,
+            poolingStrategy = null,
+            shardingStrategy = null,
+            sortingStrategy = null,
+            batchingStrategy = null,
+            flakinessStrategy = null,
+            retryStrategy = null,
+            filteringConfiguration = null,
+            ignoreFailures = null,
+            isCodeCoverageEnabled = null,
+            fallbackToScreenshots = null,
+            strictMode = null,
+            uncompletedTestRetryQuota = null,
+            testClassRegexes = null,
+            includeSerialRegexes = null,
+            excludeSerialRegexes = null,
+            testBatchTimeoutMillis = null,
+            testOutputTimeoutMillis = null,
+            debug = null,
+            screenRecordingPolicy = null,
+            vendorConfiguration = object : VendorConfiguration {
+                override fun testParser(): TestParser? = null
+                override fun deviceProvider(): DeviceProvider? = null
+                override fun logConfigurator(): MarathonLogConfigurator? = null
+            },
+            analyticsTracking = false,
+            deviceInitializationTimeoutMillis = null
+        )
+
+    companion object {
+        val isValidJunitXml = ValidationMatcher(Input.fromURI(javaClass.getResource("/junit/junit-10.xsd").toURI()))
     }
 }
 
@@ -182,39 +241,6 @@ fun createTestEvent(
         final
     )
 }
-
-fun getConfiguration() =
-    Configuration(
-        name = "",
-        outputDir = Files.createTempDirectory("test-run").toFile(),
-        analyticsConfiguration = AnalyticsConfiguration.DisabledAnalytics,
-        poolingStrategy = null,
-        shardingStrategy = null,
-        sortingStrategy = null,
-        batchingStrategy = null,
-        flakinessStrategy = null,
-        retryStrategy = null,
-        filteringConfiguration = null,
-        ignoreFailures = null,
-        isCodeCoverageEnabled = null,
-        fallbackToScreenshots = null,
-        strictMode = null,
-        uncompletedTestRetryQuota = null,
-        testClassRegexes = null,
-        includeSerialRegexes = null,
-        excludeSerialRegexes = null,
-        testBatchTimeoutMillis = null,
-        testOutputTimeoutMillis = null,
-        debug = null,
-        screenRecordingPolicy = null,
-        vendorConfiguration = object : VendorConfiguration {
-            override fun testParser(): TestParser? = null
-            override fun deviceProvider(): DeviceProvider? = null
-            override fun logConfigurator(): MarathonLogConfigurator? = null
-        },
-        analyticsTracking = false,
-        deviceInitializationTimeoutMillis = null
-    )
 
 fun getDevice() =
     DeviceInfo(

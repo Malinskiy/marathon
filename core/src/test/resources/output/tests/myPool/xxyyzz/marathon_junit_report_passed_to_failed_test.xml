@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="common" tests="1" failures="1" errors="0" skipped="0" time="11.919" timestamp="2018-11-08T11:19:01">
-  <properties></properties>
-  <testcase classname="com.example" name="test1" time="11.919">
-    <failure>
-      <![CDATA[Exception in thread "main" java.lang.RuntimeException: A test exception
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" errors="0" failures="1" name="myPool" skipped="0" tests="1" time="11.919"
+           timestamp="2018-11-08T11:19:01"
+           xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jenkinsci/xunit-plugin/ae25da5089d4f94ac6c4669bf736e4d416cc4665/src/main/resources/org/jenkinsci/plugins/xunit/types/model/xsd/junit-10.xsd">
+  <testcase name="test1" time="11.919" classname="com.example">
+    <failure><![CDATA[Exception in thread "main" java.lang.RuntimeException: A test exception
   at com.example.stacktrace.StackTraceExample.methodB(StackTraceExample.java:13)
   at com.example.stacktrace.StackTraceExample.methodA(StackTraceExample.java:9)
-  at com.example.stacktrace.StackTraceExample.main(StackTraceExample.java:5)]]>
-    </failure>
+  at com.example.stacktrace.StackTraceExample.main(StackTraceExample.java:5)]]></failure>
   </testcase>
 </testsuite>

@@ -60,6 +60,7 @@ dependencies {
     testImplementation(TestLibraries.testContainersInflux)
     testImplementation(TestLibraries.mockitoKotlin)
     testImplementation(TestLibraries.koin)
+    testImplementation(TestLibraries.xmlUnit)
     testRuntimeOnly(TestLibraries.jupiterEngine)
 }
 

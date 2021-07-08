@@ -18,7 +18,6 @@ import com.malinskiy.marathon.report.allure.AllureReporter
 import com.malinskiy.marathon.report.device.DeviceInfoJsonReporter
 import com.malinskiy.marathon.report.html.HtmlSummaryReporter
 import com.malinskiy.marathon.report.junit.JUnitReporter
-import com.malinskiy.marathon.report.junit.JUnitWriter
 import com.malinskiy.marathon.report.raw.RawJsonReporter
 import com.malinskiy.marathon.report.stdout.StdoutReporter
 import com.malinskiy.marathon.report.test.TestJsonReporter
@@ -75,7 +74,7 @@ internal class TrackerFactory(
         return ExecutionReportGenerator(
             listOf(
                 DeviceInfoJsonReporter(fileManager, gson),
-                JUnitReporter(JUnitWriter(configuration.outputDir)),
+                JUnitReporter(configuration.outputDir),
                 TimelineReporter(TimelineSummaryProvider(), gson, configuration.outputDir),
                 RawJsonReporter(fileManager, gson),
                 TestJsonReporter(fileManager, gson),

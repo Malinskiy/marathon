@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="common" tests="4" failures="2" errors="0" skipped="2" time="47.676" timestamp="2018-11-08T11:19:01">
-  <properties></properties>
-  <testcase classname="com.example" name="test1" time="11.919">
-    <failure>
-      <![CDATA[Exception in thread "main" java.lang.RuntimeException: A test exception
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" errors="0" failures="1" name="myPool" skipped="2" tests="3" time="35.757"
+           timestamp="2018-11-08T11:19:01"
+           xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jenkinsci/xunit-plugin/ae25da5089d4f94ac6c4669bf736e4d416cc4665/src/main/resources/org/jenkinsci/plugins/xunit/types/model/xsd/junit-10.xsd">
+  <testcase name="test1" time="11.919" classname="com.example">
+    <failure><![CDATA[Exception in thread "main" java.lang.RuntimeException: A test exception
   at com.example.stacktrace.StackTraceExample.methodB(StackTraceExample.java:13)
   at com.example.stacktrace.StackTraceExample.methodA(StackTraceExample.java:9)
-  at com.example.stacktrace.StackTraceExample.main(StackTraceExample.java:5)]]>
-    </failure>
+  at com.example.stacktrace.StackTraceExample.main(StackTraceExample.java:5)]]></failure>
   </testcase>
-  <testcase classname="com.example" name="test2" time="11.919">
+  <testcase name="test2" time="11.919" classname="com.example">
     <skipped></skipped>
   </testcase>
-  <testcase classname="com.example" name="test2" time="11.919">
-    <failure></failure>
-  </testcase>
-  <testcase classname="com.example" name="test3" time="11.919">
-    <skipped>
-      <![CDATA[Exception in thread "main" java.lang.RuntimeException: A test exception
+  <testcase name="test3" time="11.919" classname="com.example">
+    <skipped><![CDATA[Exception in thread "main" java.lang.RuntimeException: A test exception
   at com.example.stacktrace.StackTraceExample.methodB(StackTraceExample.java:13)
   at com.example.stacktrace.StackTraceExample.methodA(StackTraceExample.java:9)
-  at com.example.stacktrace.StackTraceExample.main(StackTraceExample.java:5)]]>
-    </skipped>
+  at com.example.stacktrace.StackTraceExample.main(StackTraceExample.java:5)]]></skipped>
   </testcase>
 </testsuite>

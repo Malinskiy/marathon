@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="common" tests="3" failures="0" errors="0" skipped="0" time="35.757" timestamp="2018-11-08T11:19:01">
-  <properties></properties>
-  <testcase classname="com.example" name="test1" time="11.919"></testcase>
-  <testcase classname="com.example" name="test2" time="11.919"></testcase>
-  <testcase classname="com.example" name="test3" time="11.919"></testcase>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" errors="0" failures="0" name="myPool" skipped="0" tests="3" time="35.757"
+           timestamp="2018-11-08T11:19:01"
+           xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jenkinsci/xunit-plugin/ae25da5089d4f94ac6c4669bf736e4d416cc4665/src/main/resources/org/jenkinsci/plugins/xunit/types/model/xsd/junit-10.xsd">
+  <testcase name="test1" time="11.919" classname="com.example"></testcase>
+  <testcase name="test2" time="11.919" classname="com.example"></testcase>
+  <testcase name="test3" time="11.919" classname="com.example"></testcase>
 </testsuite>
